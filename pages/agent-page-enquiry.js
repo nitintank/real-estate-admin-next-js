@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from "@/styles/AgentPageEnquiry.module.css";
 import Navbar from "@/components/Navbar";
 
-const agentPageEnquiry = () => {
+const AgentPageEnquiry = () => {
     const [inquiries, setInquiries] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -76,4 +76,4 @@ const agentPageEnquiry = () => {
     )
 }
 
-export default agentPageEnquiry
+export default AgentPageEnquiry

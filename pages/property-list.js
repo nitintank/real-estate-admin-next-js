@@ -3,7 +3,7 @@ import styles from "@/styles/PropertyList.module.css";
 import Navbar from "@/components/Navbar";
 import Image from 'next/image';
 
-const propertyList = () => {
+const PropertyList = () => {
   const [properties, setProperties] = useState([]);
 
   useEffect(() => {
@@ -129,4 +129,4 @@ const propertyList = () => {
   )
 }
 
-export default propertyList
+export default PropertyList

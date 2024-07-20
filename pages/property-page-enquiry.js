@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from "@/styles/PropertyPageEnquiry.module.css";
 import Navbar from "@/components/Navbar";
 
-const propertyPageEnquiry = () => {
+const PropertyPageEnquiry = () => {
     const [inquiries, setInquiries] = useState([]);
 
     useEffect(() => {
@@ -66,4 +66,4 @@ const propertyPageEnquiry = () => {
     )
 }
 
-export default propertyPageEnquiry
+export default PropertyPageEnquiry

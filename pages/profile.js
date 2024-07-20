@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from "@/styles/Profile.module.css";
 import Navbar from "@/components/Navbar";
 
-const profile = () => {
+const Profile = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [phone_number, setPhoneNumber] = useState('');
@@ -154,4 +154,4 @@ const profile = () => {
     )
 }
 
-export default profile
+export default Profile

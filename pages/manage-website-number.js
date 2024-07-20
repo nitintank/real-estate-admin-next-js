@@ -3,7 +3,7 @@ import styles from "@/styles/ManageWebsiteNumber.module.css";
 import Navbar from "@/components/Navbar";
 import { useRouter } from 'next/router';
 
-const manageWebsiteNumber = () => {
+const ManageWebsiteNumber = () => {
     const [supportcontact, setSupportcontact] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -145,4 +145,4 @@ const manageWebsiteNumber = () => {
     )
 }
 
-export default manageWebsiteNumber
+export default ManageWebsiteNumber

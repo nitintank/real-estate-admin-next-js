@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from "@/styles/NewProperty.module.css";
 import Navbar from "@/components/Navbar";
 
-const newProperty = () => {
+const NewProperty = () => {
     const [properties, setProperties] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -116,4 +116,4 @@ const newProperty = () => {
     )
 }
 
-export default newProperty
+export default NewProperty

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from "@/styles/ContactUsEnquiries.module.css";
 import Navbar from "@/components/Navbar";
 
-const contactUsEnquiries = () => {
+const ContactUsEnquiries = () => {
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -73,4 +73,4 @@ const contactUsEnquiries = () => {
     )
 }
 
-export default contactUsEnquiries
+export default ContactUsEnquiries

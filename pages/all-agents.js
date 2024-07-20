@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const allAgents = () => {
+const AllAgents = () => {
     const [agents, setAgents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -106,4 +106,4 @@ const allAgents = () => {
     )
 }
 
-export default allAgents
+export default AllAgents

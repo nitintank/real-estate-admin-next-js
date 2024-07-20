@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-const userList = () => {
+const UserList = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -176,4 +176,4 @@ const userList = () => {
     )
 }
 
-export default userList
+export default UserList

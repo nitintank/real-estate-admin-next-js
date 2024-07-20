@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styles from "@/styles/AddAgent.module.css";
 import Navbar from "@/components/Navbar";
+import Image from 'next/image';
 
-const addAgent = () => {
+const AddAgent = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -91,7 +92,7 @@ const addAgent = () => {
                     <input type="text" placeholder="Add Youtube Link" name="youtube" value={formData.youtube} onChange={handleChange} />
                     <label htmlFor="">Add Agent Profile Image</label>
                     <input type="file" name="image" onChange={handleChange} />
-                    {imagePreview && <img src={imagePreview} alt="Image Preview" style={{ marginTop: '10px', width: '200px', height: 'auto' }} />}
+                    {imagePreview && <Image width={200} height={200} src={imagePreview} alt="Image Preview" style={{ marginTop: '10px', width: '200px', height: 'auto' }} />}
                     <input type="submit" value="Add Agent" />
                 </form>
             </section>
@@ -99,4 +100,4 @@ const addAgent = () => {
     )
 }
 
-export default addAgent
+export default AddAgent

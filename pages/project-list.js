@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import styles from "@/styles/ProjectList.module.css";
 import Image from 'next/image';
 
-const projectList = () => {
+const ProjectList = () => {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -104,4 +104,4 @@ const projectList = () => {
     )
 }
 
-export default projectList
+export default ProjectList

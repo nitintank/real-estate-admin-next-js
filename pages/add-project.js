@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from "@/styles/AddProject.module.css";
 import Navbar from "@/components/Navbar";
 
-const addProject = () => {
+const AddProject = () => {
     const [projectName, setProjectName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
@@ -321,4 +321,4 @@ const addProject = () => {
     )
 }
 
-export default addProject
+export default AddProject
