@@ -1,0 +1,228 @@
+/* Dashboard CSS */
+
+.dashboard_main_box {
+  width: calc(100% - 260px);
+  margin-left: 260px;
+  height: calc(100vh - 65px);
+  margin-top: 65px;
+  background-color: #edf2f6;
+  padding: 20px;
+}
+
+.dashboard_main_box h2 {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.customer_filter_big_box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px auto;
+}
+
+.customer_filter_big_box button {
+  background-color: var(--blue-color);
+  color: white;
+  padding: 5px 15px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.search_customer_box {
+  position: relative;
+}
+
+.search_customer_box input {
+  width: 300px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid rgb(194, 194, 194);
+}
+
+.search_customer_box i {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Table Box CSS */
+
+.table_big_box {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.customers {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 2px auto;
+}
+
+.customers td,
+.customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  white-space:nowrap;
+}
+
+.customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.customers tr:hover {
+  background-color: #ddd;
+}
+
+.customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: var(--blue-color);
+  color: white;
+}
+
+.suspend_btn {
+  background-color: rgb(255, 0, 0);
+  color: white;
+  padding: 2px 10px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.padding_0 {
+  padding: 0px !important;
+}
+
+.hide_view_btn {
+  background-color: var(--blue-color);
+  color: white;
+  padding: 2px 15px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.approve_btn {
+  background-color: green;
+  color: white;
+  padding: 2px 5px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.approve_btn:disabled,
+.approve_btn[disabled]{
+  border: 1px solid green;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.reject_btn{
+  background-color: red;
+  color: white;
+  padding: 2px 5px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.reject_btn:disabled,
+.reject_btn[disabled]{
+  border: 1px solid red;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.edit_link_btn{
+  text-decoration: none;
+  font-size: 14px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 2px 5px;
+  white-space:nowrap;
+}
+
+.edit_link_btn i{
+  font-size: 14px;
+}
+
+.button_mega_box{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Responsive Code */
+
+@media (max-width: 769px) {
+  .dashboard_main_box {
+    width: 100%;
+    margin-left: 0px;
+    height: calc(100vh - 65px);
+    margin-top: 65px;
+    padding: 10px;
+  }
+
+  .dashboard_main_box h2 {
+    font-size: 25px;
+    text-align: center;
+  }
+
+  .customer_filter_big_box button {
+    display: none;
+  }
+
+  .search_customer_box {
+    width: 100%;
+  }
+
+  .search_customer_box input {
+    width: 100%;
+  }
+
+  /* Table CSS Code */
+  .customers th {
+    white-space: nowrap;
+    font-size: 14px;
+  }
+
+  .customers td,
+  .customers th {
+    padding: 5px;
+    font-size: 14px;
+  }
+}

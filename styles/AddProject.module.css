@@ -1,0 +1,117 @@
+/* Dashboard CSS */
+
+.dashboard_main_box {
+    width: calc(100% - 260px);
+    margin-left: 260px;
+    height: calc(100vh - 65px);
+    margin-top: 65px;
+    background-color: #edf2f6;
+    padding: 20px;
+}
+
+.dashboard_main_box h2 {
+    font-size: 30px;
+    line-height: 1;
+}
+
+/* Form Box Css */
+
+.formMainBox {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.formMainBox input {
+    width: 100%;
+    border: 1px solid #c5c5c5;
+    padding: 5px 10px;
+    color: black;
+    font-size: 14px;
+    border-radius: 10px;
+}
+
+.formMainBox textarea {
+    width: 100%;
+    border: 1px solid #c5c5c5;
+    padding: 5px 10px;
+    color: black;
+    font-size: 14px;
+    border-radius: 10px;
+}
+
+.formMainBox select {
+    width: 100%;
+    border: 1px solid #c5c5c5;
+    padding: 5px 10px;
+    color: black;
+    font-size: 14px;
+    border-radius: 10px;
+}
+
+.building_box_css {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.floor_box_css {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.add_floor_css {
+    width: 150px;
+    padding: 4px 10px;
+    font-size: 15px;
+    background-color: #1085FF;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.add_floor_css i {
+    font-size: 15px;
+}
+
+.label_font_size {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.checkbox_css {
+    width: 33%;
+    display: flex;
+    gap: 5px;
+}
+
+.checkbox_css input[type=checkbox] {
+    width: auto;
+}
+
+.fieldset_css {
+    display: flex;
+    padding: 5px 10px;
+}
+
+.submit_btn_css {
+    padding: 4px 50px;
+    font-size: 18px;
+    background-color: #1085FF;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin: 10px auto;
+}

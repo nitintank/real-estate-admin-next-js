@@ -1,0 +1,154 @@
+/* Dashboard CSS */
+
+.dashboard_main_box {
+  width: calc(100% - 260px);
+  margin-left: 260px;
+  height: calc(100vh - 65px);
+  margin-top: 65px;
+  background-color: #edf2f6;
+  padding: 20px;
+}
+
+.dashboard_main_box h2 {
+  font-size: 30px;
+  line-height: 1;
+}
+
+/* Customer Filter Box CSS */
+
+.customer_filter_big_box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px auto;
+}
+
+.switch_toggle {
+    float: left;
+    background: white;
+    border-radius: 7px;
+    padding: 0px 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.switch_toggle input {
+    position: absolute;
+    opacity: 0;
+}
+
+.switch_toggle input+label {
+    padding: 7px;
+    float: left;
+    color: var(--blue-color);
+    cursor: pointer;
+}
+
+.switch_toggle input:checked+label {
+    border-bottom: 4px solid var(--blue-color);
+}
+
+/* Table Box CSS */
+
+.table_big_box {
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.customers {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px auto;
+}
+
+.customers td,
+.customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.customers tr:hover {
+  background-color: #ddd;
+}
+
+.customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: var(--blue-color);
+  color: white;
+}
+
+.reject_btn {
+    color: red;
+    padding: 2px 10px;
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.approve_btn{
+    color: green;
+    padding: 2px 10px;
+    border: 1px solid green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.action_btn_box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Responsive Code */
+
+@media (max-width: 769px) {
+  .dashboard_main_box {
+    width: 100%;
+    margin-left: 0px;
+    height: calc(100vh - 65px);
+    margin-top: 65px;
+    padding: 10px;
+  }
+
+  .dashboard_main_box h2 {
+    font-size: 25px;
+    text-align: center;
+  }
+
+  .switch_toggle{
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .switch_toggle input+label{
+    font-size: 14px;
+  }
+
+  /* Table CSS Code */
+  .customers th{
+    white-space: nowrap;
+    font-size: 14px;
+  }
+  .customers td, .customers th{
+    padding: 5px;
+    font-size: 14px;
+  }
+}
