@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import styles from "@/styles/UserList.module.css";
 import Navbar from "@/components/Navbar";
 import { useRouter } from 'next/router';
-import Link from 'next/link';
+import ChangePasswordModal from '@/components/ChangePasswordModal'; // Import the new modal component
 
 const UserList = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [viewProperties, setViewProperties] = useState({});
+    const [searchQuery, setSearchQuery] = useState('');
+    const [selectedUser, setSelectedUser] = useState(null); // For the selected user for password change
     const router = useRouter();
 
     useEffect(() => {
@@ -78,6 +80,30 @@ const UserList = () => {
             });
     };
 
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+    };
+
+    // const handlePasswordChangeClick = (user) => {
+    //     setSelectedUser(user);
+    // };
+    const handlePasswordChangeClick = (user) => {
+        setSelectedUser({
+            ...user,
+            userType: 'user' // or 'agent' based on your context
+        });
+    };
+
+    const closePasswordChangeModal = () => {
+        setSelectedUser(null);
+    };
+
+    const filteredUsers = users.filter(user =>
+        user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.phone_number.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -95,7 +121,12 @@ const UserList = () => {
                 <div className={styles.customer_filter_big_box}>
                     <button><i className='bx bxs-plus-circle'></i> Add New Customer</button>
                     <div className={styles.search_customer_box}>
-                        <input type="text" placeholder="Search Customer By Name" />
+                        <input
+                            type="text"
+                            placeholder="Search Customer By Name, Email, Phone Number"
+                            value={searchQuery}
+                            onChange={handleSearchChange}
+                        />
                         <i className='bx bx-search-alt'></i>
                     </div>
                 </div>
@@ -111,7 +142,7 @@ const UserList = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {users.map((user, index) => (
+                            {filteredUsers.map((user, index) => (
                                 <React.Fragment key={user.user_id}>
                                     <tr>
                                         <td>{index + 1}</td>
@@ -121,6 +152,9 @@ const UserList = () => {
                                         <td>
                                             <button onClick={() => toggleViewProperties(user.user_id)} className={styles.hide_view_btn}>
                                                 {viewProperties[user.user_id] ? 'Hide' : 'View'}
+                                            </button>
+                                            <button onClick={() => handlePasswordChangeClick(user)} className={styles.change_password_btn}>
+                                                Change Password
                                             </button>
                                         </td>
                                     </tr>
@@ -172,8 +206,15 @@ const UserList = () => {
                     </table>
                 </div>
             </section>
+            {selectedUser && (
+                <ChangePasswordModal
+                    user={selectedUser}
+                    onClose={closePasswordChangeModal}
+                    userType={selectedUser.userType}
+                />
+            )}
         </>
-    )
-}
+    );
+};
 
-export default UserList
+export default UserList;

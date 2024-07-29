@@ -157,6 +157,32 @@ const Navbar = () => {
                                 <span className={styles.navlink}>Manage Number</span>
                             </Link>
                         </li>
+                        <li className={styles.item}>
+                            <Link href="/all-subscription-plan" className={styles.nav_link}>
+                                <span className={styles.navlink_icon}>
+                                    <i className='bx bx-list-ol'></i>
+                                  
+                                </span>
+                                <span className={styles.navlink}>Subscription plan</span>
+                            </Link>
+                        </li>
+                        <li className={styles.item}>
+                            <Link href="/all-user-subscription" className={styles.nav_link}>
+                                <span className={styles.navlink_icon}>
+                                    <i className='bx bx-list-ol'></i>
+                                </span>
+                                <span className={styles.navlink}>All User Subscription Plan</span>
+                            </Link>
+                        </li>
+                       
+                        <li className={styles.item}>
+                            <Link href="/all-transtion-approval-list" className={styles.nav_link}>
+                                <span className={styles.navlink_icon}>
+                                    <i className='bx bx-list-ol'></i>
+                                </span>
+                                <span className={styles.navlink}>All transtion-approval</span>
+                            </Link>
+                        </li>
                     </ul>
                 </div>
             </nav>

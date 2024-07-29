@@ -1,9 +1,22 @@
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
 import Navbar from "@/components/Navbar";
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export default function Home() {
+
+  const [users, setUsers] = useState([]);
+  const [plans, setPlans] = useState([]);
+  const [agents, setAgents] = useState([]);
+  const [properties, setProperties] = useState([]);
+  const [approvedPropertyCount, setApprovedPropertyCount] = useState(0);
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+
+
   useEffect(() => {
     // Check local storage if user is logged in
     const loggedInStatus = localStorage.getItem('username');
@@ -11,32 +24,203 @@ export default function Home() {
         location.href = "/login"
     }
   }, []);
+
+  // user listing
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = () => {
+    fetch('https://a.khelogame.xyz/admin/users', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('API Response:', data);
+        setUsers(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        setError(error);
+        setLoading(false);
+      });
+  };
+
+  // agent listing
+  useEffect(() => {
+    const fetchAgents = async () => {
+        try {
+            const response = await fetch('https://a.khelogame.xyz/all_agents');
+            if (!response.ok) {
+                throw new Error('Failed to fetch agents');
+            }
+            const data = await response.json();
+            setAgents(data);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    fetchAgents();
+}, []);
+
+// all Properties listing
+
+useEffect(() => {
+  const fetchProperties = async () => {
+    try {
+      const response = await fetch('https://a.khelogame.xyz/admin/all-properties', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setProperties(data);
+        // d
+        const approvedCount = data.filter(property => property.status === 'approved').length;
+        setApprovedPropertyCount(approvedCount);
+      } else {
+        console.error('Failed to fetch properties');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
+
+  fetchProperties();
+}, []);
+
+// all user puchaase subscripton plan
+useEffect(() => {
+  const fetchUserPlans = async () => {
+      try {
+          const response = await fetch('https://a.khelogame.xyz/admin/all-user-subscriptions', {
+              method: 'GET',
+              headers: {
+                  'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+              },
+          });
+          if (!response.ok) {
+              throw new Error('Failed to fetch subscription plans');
+          }
+          const data = await response.json();
+          if (data.error) {
+              setError(data.error);
+          } else {
+              setPlans(data.users || []);
+          }
+      } catch (err) {
+          setError(err.message);
+      } finally {
+          setLoading(false);
+      }
+  };
+
+  fetchUserPlans();
+}, []);
+
+// all trnastion
+useEffect(() => {
+  const fetchAgentTransactions = async () => {
+      try {
+          const response = await fetch('https://a.khelogame.xyz/admin/agent-transactions', {
+              method: 'GET',
+              headers: {
+                  'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+              },
+          });
+          if (!response.ok) {
+              throw new Error('Failed to fetch agent transactions');
+          }
+          const data = await response.json();
+          if (data.error) {
+              setError(data.error);
+          } else {
+              setTransactions(data);
+          }
+      } catch (err) {
+          setError(err.message);
+      } finally {
+          setLoading(false);
+      }
+  };
+
+  fetchAgentTransactions();
+}, []);
+
+
+
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
   return (
     <>
       <Navbar/>
       {/* <!-- Dashboard --> */}
       <section className={styles.dashboard_main_box}>
         <h2>Dashboard</h2>
-        <div className={styles.dashboard_content_cards_big_box}>
+        <div className={styles.dashboard_content_cards_big_box}> 
           <div className={styles.dashboard_content_cards}>
             <Image width={200} height={200} src="/images/ad-ico-1.png" alt="" />
-            <p>Properties for Rent</p>
-            <h4>546</h4>
+            <Link href={`/user-list`}>
+            <p>User Listing  </p>
+            </Link>
+            <h4>{users.length}</h4>
           </div>
+
+          <div className={styles.dashboard_content_cards}>
+            <Image width={200} height={200} src="/images/ad-ico-1.png" alt="" />
+            <Link href={`/all-agents`}>
+            <p>Agent Listing  </p>
+            </Link>
+            <h4>{agents.length}</h4>
+          </div>
+          
           <div className={styles.dashboard_content_cards}>
             <Image width={200} height={200} src="/images/ad-ico-2.png" alt="" />
-            <p>Properties for Sale</p>
-            <h4>684</h4>
+            <Link href={`/property-list`}>
+            <p> All Properties</p>
+            </Link>
+            <h4>{properties.length}</h4>
           </div>
+
+          <div className={styles.dashboard_content_cards}>
+            <Image width={200} height={200} src="/images/ad-ico-2.png" alt="" />
+            <Link href={`/property-list?status=approved`}>
+            <p> Live Property</p>
+            </Link>
+            <h4>{approvedPropertyCount}</h4>
+          </div>
+
           <div className={styles.dashboard_content_cards}>
             <Image width={200} height={200} src="/images/ad-ico-3.png" alt="" />
-            <p>Total Customer</p>
-            <h4>999</h4>
+            <Link href={`/all-transtion-approval-list?status=approved`}>
+            <p>Transactions Approveal</p>
+            </Link>
+            <h4>{transactions.length}</h4>
           </div>
           <div className={styles.dashboard_content_cards}>
             <Image width={200} height={200} src="/images/ad-ico-4.png" alt="" />
-            <p>Total City</p>
-            <h4>75</h4>
+            <Link href={`/all-user-subscription`}>
+            <p>Subscription User</p>
+            </Link>
+            <h4>{plans.length}</h4>
           </div>
         </div>
 
@@ -97,6 +281,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+    
     </>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from "@/styles/AllReviews.module.css";
 import Navbar from "@/components/Navbar";
+import Link from 'next/link';
 
 const AllReviews = () => {
     const [reviews, setReviews] = useState([]);
@@ -120,6 +121,7 @@ const AllReviews = () => {
                         </thead>
                         <tbody>
                             {filteredReviews.map(review => (
+                                
                                 <tr key={review.review_id}>
                                     <td>
                                         <div className={styles.review_content_box}>
@@ -129,7 +131,9 @@ const AllReviews = () => {
                                     </td>
                                     <td>
                                         <div className={styles.property_name_box}>
+                                        <Link href={`/property?id=${review.property_id}`}>
                                             <h4>{review.property_name}</h4>
+                                            </Link>
                                             <p>AED {review.price}</p>
                                         </div>
                                     </td>

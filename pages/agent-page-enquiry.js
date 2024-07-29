@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import styles from "@/styles/AgentPageEnquiry.module.css";
 import Navbar from "@/components/Navbar";
 
@@ -36,7 +37,6 @@ const AgentPageEnquiry = () => {
     return (
         <>
             <Navbar />
-            {/* <!-- Dashboard --> */}
             <section className={styles.dashboard_main_box}>
                 <h2>Agent Page Enquiries</h2>
                 <div className={styles.table_big_box}>
@@ -49,6 +49,8 @@ const AgentPageEnquiry = () => {
                             <thead>
                                 <tr>
                                     <th>S No.</th>
+                                    <th>Agent Name</th>
+                                    <th>Agent Profile</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone Number</th>
@@ -60,6 +62,18 @@ const AgentPageEnquiry = () => {
                                 {inquiries.map((inquiry, index) => (
                                     <tr key={inquiry.id}>
                                         <td>{index + 1}</td>
+                                        <td>{inquiry.agent_name}</td>
+                                        <td>
+                                            {inquiry.agent_image_path && (
+                                                <Image
+                                                    width={100}
+                                                    height={100}
+                                                    src={inquiry.agent_image_path ? `https://a.khelogame.xyz/${inquiry.agent_image_path}` : '/images/default-property.png'}
+                                                    alt={inquiry.agent_name}
+                                                    className={styles.agent_profile_img}
+                                                />
+                                            )}
+                                        </td>
                                         <td>{inquiry.name}</td>
                                         <td>{inquiry.email}</td>
                                         <td>{inquiry.phone}</td>
@@ -76,4 +90,4 @@ const AgentPageEnquiry = () => {
     )
 }
 
-export default AgentPageEnquiry
+export default AgentPageEnquiry;

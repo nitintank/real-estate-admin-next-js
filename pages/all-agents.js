@@ -4,11 +4,13 @@ import Navbar from "@/components/Navbar";
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
+import ChangePasswordModal from '@/components/ChangePasswordModal'; // Import the new modal component
 
 const AllAgents = () => {
     const [agents, setAgents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
     const [selectedAgent, setSelectedAgent] = useState(null);
     const router = useRouter();
 
@@ -35,6 +37,27 @@ const AllAgents = () => {
         router.push(`/admin-panel/admin-edit-agent/${agentId}`);
     };
 
+    const handlePasswordChangeClick = (agent) => {
+        setSelectedAgent(agent);
+    };
+
+    const closePasswordChangeModal = () => {
+        setSelectedAgent(null);
+    };
+
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+    };
+
+    const filteredAgent = agents.filter(agent =>
+        agent.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        agent.email.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        agent.phone_number.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        agent.office_phone_number.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        agent.address.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    
+
     return (
         <>
             <Navbar />
@@ -43,7 +66,8 @@ const AllAgents = () => {
                 <h2>All Agents List</h2>
                 <div className={styles.customer_filter_big_box}>
                     <div className={styles.search_customer_box}>
-                        <input type="text" placeholder="Search Agent By Name" />
+                        <input type="text" placeholder="Search Agent By Name"  value={searchQuery}
+                            onChange={handleSearchChange} />
                         <i className='bx bx-search-alt'></i>
                     </div>
                     <Link href='/add-agent'><button><i className='bx bxs-plus-circle'></i> Add New Agent</button></Link>
@@ -70,7 +94,7 @@ const AllAgents = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {agents.map((agent) => (
+                                {filteredAgent.map((agent) => (
                                     <tr key={agent.id}>
                                         <td>{agent.id}</td>
                                         <td>{agent.name}</td>
@@ -94,6 +118,7 @@ const AllAgents = () => {
                                         <td>
                                             <i className='bx bx-edit' onClick={() => handleEditClick(agent.id)}></i>
                                             <i className='bx bx-trash' onClick={() => handleDeleteClick(agent.id)}></i>
+                                            <i className='bx bx-key' onClick={() => handlePasswordChangeClick(agent)}></i> {/* New icon for changing password */}
                                         </td>
                                     </tr>
                                 ))}
@@ -102,8 +127,15 @@ const AllAgents = () => {
                     )}
                 </div>
             </section>
+            {selectedAgent && (
+                <ChangePasswordModal
+                    user={selectedAgent}
+                    onClose={closePasswordChangeModal}
+                    userType="agent" 
+                />
+            )}
         </>
     )
 }
 
-export default AllAgents
+export default AllAgents;
