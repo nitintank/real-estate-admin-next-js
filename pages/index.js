@@ -15,13 +15,11 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
-
   useEffect(() => {
     // Check local storage if user is logged in
     const loggedInStatus = localStorage.getItem('username');
     if (loggedInStatus == null) {
-        location.href = "/login"
+      location.href = "/login"
     }
   }, []);
 
@@ -58,110 +56,110 @@ export default function Home() {
   // agent listing
   useEffect(() => {
     const fetchAgents = async () => {
-        try {
-            const response = await fetch('https://a.khelogame.xyz/all_agents');
-            if (!response.ok) {
-                throw new Error('Failed to fetch agents');
-            }
-            const data = await response.json();
-            setAgents(data);
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
+      try {
+        const response = await fetch('https://a.khelogame.xyz/all_agents');
+        if (!response.ok) {
+          throw new Error('Failed to fetch agents');
         }
+        const data = await response.json();
+        setAgents(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchAgents();
-}, []);
+  }, []);
 
-// all Properties listing
+  // all Properties listing
 
-useEffect(() => {
-  const fetchProperties = async () => {
-    try {
-      const response = await fetch('https://a.khelogame.xyz/admin/all-properties', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const response = await fetch('https://a.khelogame.xyz/admin/all-properties', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+          }
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setProperties(data);
+          // d
+          const approvedCount = data.filter(property => property.status === 'approved').length;
+          setApprovedPropertyCount(approvedCount);
+        } else {
+          console.error('Failed to fetch properties');
         }
-      });
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    };
 
-      if (response.ok) {
+    fetchProperties();
+  }, []);
+
+  // all user puchaase subscripton plan
+  useEffect(() => {
+    const fetchUserPlans = async () => {
+      try {
+        const response = await fetch('https://a.khelogame.xyz/admin/all-user-subscriptions', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch subscription plans');
+        }
         const data = await response.json();
-        setProperties(data);
-        // d
-        const approvedCount = data.filter(property => property.status === 'approved').length;
-        setApprovedPropertyCount(approvedCount);
-      } else {
-        console.error('Failed to fetch properties');
-      }
-    } catch (error) {
-      console.error('An error occurred:', error);
-    }
-  };
-
-  fetchProperties();
-}, []);
-
-// all user puchaase subscripton plan
-useEffect(() => {
-  const fetchUserPlans = async () => {
-      try {
-          const response = await fetch('https://a.khelogame.xyz/admin/all-user-subscriptions', {
-              method: 'GET',
-              headers: {
-                  'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-              },
-          });
-          if (!response.ok) {
-              throw new Error('Failed to fetch subscription plans');
-          }
-          const data = await response.json();
-          if (data.error) {
-              setError(data.error);
-          } else {
-              setPlans(data.users || []);
-          }
+        if (data.error) {
+          setError(data.error);
+        } else {
+          setPlans(data.users || []);
+        }
       } catch (err) {
-          setError(err.message);
+        setError(err.message);
       } finally {
-          setLoading(false);
+        setLoading(false);
       }
-  };
+    };
 
-  fetchUserPlans();
-}, []);
+    fetchUserPlans();
+  }, []);
 
-// all trnastion
-useEffect(() => {
-  const fetchAgentTransactions = async () => {
+  // all trnastion
+  useEffect(() => {
+    const fetchAgentTransactions = async () => {
       try {
-          const response = await fetch('https://a.khelogame.xyz/admin/agent-transactions', {
-              method: 'GET',
-              headers: {
-                  'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-              },
-          });
-          if (!response.ok) {
-              throw new Error('Failed to fetch agent transactions');
-          }
-          const data = await response.json();
-          if (data.error) {
-              setError(data.error);
-          } else {
-              setTransactions(data);
-          }
+        const response = await fetch('https://a.khelogame.xyz/admin/agent-transactions', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch agent transactions');
+        }
+        const data = await response.json();
+        if (data.error) {
+          setError(data.error);
+        } else {
+          setTransactions(data);
+        }
       } catch (err) {
-          setError(err.message);
+        setError(err.message);
       } finally {
-          setLoading(false);
+        setLoading(false);
       }
-  };
+    };
 
-  fetchAgentTransactions();
-}, []);
+    fetchAgentTransactions();
+  }, []);
 
 
 
@@ -171,57 +169,46 @@ useEffect(() => {
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       {/* <!-- Dashboard --> */}
       <section className={styles.dashboard_main_box}>
         <h2>Dashboard</h2>
-        <div className={styles.dashboard_content_cards_big_box}> 
-          <div className={styles.dashboard_content_cards}>
-            <Image width={200} height={200} src="/images/ad-ico-1.png" alt="" />
-            <Link href={`/user-list`}>
+        <div className={styles.dashboard_content_cards_big_box}>
+          <Link href={`/user-list`} className={styles.dashboard_content_cards}>
+            <Image width={200} height={200} src="/images/user-list-img.jpg" alt="" />
             <p>User Listing  </p>
-            </Link>
             <h4>{users.length}</h4>
-          </div>
+          </Link>
 
-          <div className={styles.dashboard_content_cards}>
-            <Image width={200} height={200} src="/images/ad-ico-1.png" alt="" />
-            <Link href={`/all-agents`}>
+          <Link href={`/all-agents`} className={styles.dashboard_content_cards}>
+            <Image width={200} height={200} src="/images/agent-img.jpg" alt="" />
             <p>Agent Listing  </p>
-            </Link>
             <h4>{agents.length}</h4>
-          </div>
-          
-          <div className={styles.dashboard_content_cards}>
-            <Image width={200} height={200} src="/images/ad-ico-2.png" alt="" />
-            <Link href={`/property-list`}>
+          </Link>
+
+          <Link href={`/property-list`} className={styles.dashboard_content_cards}>
+            <Image width={200} height={200} src="/images/all-property.jpg" alt="" />
             <p> All Properties</p>
-            </Link>
             <h4>{properties.length}</h4>
-          </div>
+          </Link>
 
-          <div className={styles.dashboard_content_cards}>
+          <Link href={`/property-list?status=approved`} className={styles.dashboard_content_cards}>
             <Image width={200} height={200} src="/images/ad-ico-2.png" alt="" />
-            <Link href={`/property-list?status=approved`}>
             <p> Live Property</p>
-            </Link>
             <h4>{approvedPropertyCount}</h4>
-          </div>
+          </Link>
 
-          <div className={styles.dashboard_content_cards}>
+          <Link href={`/all-transtion-approval-list?status=approved`} className={styles.dashboard_content_cards}>
             <Image width={200} height={200} src="/images/ad-ico-3.png" alt="" />
-            <Link href={`/all-transtion-approval-list?status=approved`}>
-            <p>Transactions Approveal</p>
-            </Link>
+            <p>Transactions Approved</p>
             <h4>{transactions.length}</h4>
-          </div>
-          <div className={styles.dashboard_content_cards}>
+          </Link>
+
+          <Link href={`/all-user-subscription`} className={styles.dashboard_content_cards}>
             <Image width={200} height={200} src="/images/ad-ico-4.png" alt="" />
-            <Link href={`/all-user-subscription`}>
             <p>Subscription User</p>
-            </Link>
             <h4>{plans.length}</h4>
-          </div>
+          </Link>
         </div>
 
         <div className={styles.below_big_box}>
@@ -281,7 +268,7 @@ useEffect(() => {
           </div>
         </div>
       </section>
-    
+
     </>
   );
 }

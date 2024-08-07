@@ -10,7 +10,7 @@
 }
 
 .dashboard_main_box h2 {
-  font-size: 30px;
+  font-size: 25px;
   line-height: 1;
 }
 
@@ -19,11 +19,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
   margin: 10px auto;
 }
 
 .dashboard_content_cards {
-  width: 24%;
+  text-decoration: none;
+  color: black;
+  width: 32.5%;
   background-color: white;
   padding: 20px;
   border-radius: 15px;
@@ -34,16 +38,17 @@
 }
 
 .dashboard_content_cards img {
-  width: 60px;
-  height: auto;
+  width: auto;
+  height: 60px;
 }
 
 .dashboard_content_cards p {
   font-size: 16px;
+  text-align: center;
 }
 
 .dashboard_content_cards h4 {
-  font-size: 22px;
+  font-size: 20px;
 }
 
 /* Below Big Box Section */

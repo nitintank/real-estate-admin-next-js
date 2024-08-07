@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import styles from "@/styles/ManageWebsiteNumber.module.css";
+import styles from "@/styles/EditAgentProfile.module.css";
 import Navbar from "@/components/Navbar";
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import Image from 'next/image';
 
 const EditAgent = () => {
@@ -100,105 +99,103 @@ const EditAgent = () => {
             <Navbar />
             {/* <!-- Dashboard --> */}
             <section className={styles.dashboard_main_box}>
-                <h2>Edit Website Number</h2>
+                <h2>Edit Agent Profile</h2>
                 {error && <p className={styles.error}>{error}</p>}
                 <form onSubmit={handleSubmit} className={styles.website_form_big_box}>
-                <input
-                            type="text"
-                            name="name"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                        <label>Email</label>
-                        <input
-                            type="text"
-                            name="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        
-                        <label>Phone Number</label>
-                        <input
-                            type="text"
-                            name="phone_number"
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
-                        />
-                        <label>Address</label>
-                        <input
-                            type="text"
-                            name="address"
-                            value={address}
-                            onChange={(e) => setAddress(e.target.value)}
-                        />
-                        <label>Office Phone Number</label>
-                        <input
-                            type="text"
-                            name="office_phone_number"
-                            value={officePhoneNumber}
-                            onChange={(e) => setOfficePhoneNumber(e.target.value)}
-                        />
-                        <label>Description</label>
-                        <br></br>
+                    <label>Name</label>
+                    <input
+                        type="text"
+                        name="name"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <label>Email</label>
+                    <input
+                        type="text"
+                        name="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
 
-                         <textarea
-                            name="description"
-                            rows="10"
-                            cols="90"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
+                    <label>Phone Number</label>
+                    <input
+                        type="text"
+                        name="phone_number"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                    />
+                    <label>Address</label>
+                    <input
+                        type="text"
+                        name="address"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                    />
+                    <label>Office Phone Number</label>
+                    <input
+                        type="text"
+                        name="office_phone_number"
+                        value={officePhoneNumber}
+                        onChange={(e) => setOfficePhoneNumber(e.target.value)}
+                    />
+                    <label>Description</label>
+                    <textarea
+                        name="description"
+                        rows="10"
+                        cols="90"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                    <label>Experience</label>
+                    <input
+                        type="text"
+                        value={experience}
+                        onChange={(e) => setExperience(e.target.value)}
+                    />
+                    <label>Twitter</label>
+                    <input
+                        type="text"
+                        name="twitter"
+                        value={twitter}
+                        onChange={(e) => setTwitter(e.target.value)}
+                    />
+                    <label>Facebook</label>
+                    <input
+                        type="text"
+                        name="facebook"
+                        value={facebook}
+                        onChange={(e) => setFacebook(e.target.value)}
+                    />
+                    <label>Instagram</label>
+                    <input
+                        type="text"
+                        name="instagram"
+                        value={instagram}
+                        onChange={(e) => setInstagram(e.target.value)}
+                    />
+                    <label>Youtube</label>
+                    <input
+                        type="text"
+                        name="youtube"
+                        value={youtube}
+                        onChange={(e) => setYoutube(e.target.value)}
+                    />
+                    <label>Update Profile Image</label>
+                    <input
+                        type="file"
+                        name="image"
+                        onChange={(e) => setImagePath(e.target.files[0])}
+                    />
+                    {imagePath && typeof imagePath === 'string' && (
+                        <Image
+                            src={`https://a.khelogame.xyz/${imagePath}`}
+                            alt="Profile Image"
+                            width={200}
+                            height={200}
                         />
-                         <br/>
-                        <label>Experience</label>
-                         <input
-                            type="text"
-                            value={experience}
-                            onChange={(e) => setExperience(e.target.value)}
-                        />
-                        <label>Twitter</label>
-                        <input
-                            type="text"
-                            name="twitter"
-                            value={twitter}
-                            onChange={(e) => setTwitter(e.target.value)}
-                        />
-                        <label>Facebook</label>
-                        <input
-                            type="text"
-                            name="facebook"
-                            value={facebook}
-                            onChange={(e) => setFacebook(e.target.value)}
-                        />
-                        <label>Instagram</label>
-                        <input
-                            type="text"
-                            name="instagram"
-                            value={instagram}
-                            onChange={(e) => setInstagram(e.target.value)}
-                        />
-                        <label>Youtube</label>
-                        <input
-                            type="text"
-                            name="youtube"
-                            value={youtube}
-                            onChange={(e) => setYoutube(e.target.value)}
-                        />
-                        <label>Update Profile Image</label>
-                        <input
-                            type="file"
-                            name="image"
-                            onChange={(e) => setImagePath(e.target.files[0])}
-                        />
-                        {imagePath && typeof imagePath === 'string' && (
-                            <Image
-                                src={`https://a.khelogame.xyz/${imagePath}`}
-                                alt="Profile Image"
-                                width={200}
-                                height={200}
-                            />
-                        )}
-                        
-                        <button type="submit" className={styles.submit_btn_css}><i class='bx bxs-add-to-queue'></i> Update Agent</button>
+                    )}
+
+                    <button type="submit" className={styles.submit_btn_css}><i class='bx bxs-add-to-queue'></i> Update Agent</button>
                 </form>
             </section>
         </>

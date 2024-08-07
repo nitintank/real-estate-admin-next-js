@@ -46,7 +46,7 @@ const ChangePasswordModal = ({ user, onClose, userType }) => {
         <div className={styles.modal}>
             <div className={styles.modalContent}>
                 <span className={styles.close} onClick={onClose}>&times;</span>
-                <h2>Change Password for {user.name}</h2>
+                <h2>Change Password for {user.username}</h2>
                 <div className={styles.formGroup}>
                     <label>New Password:</label>
                     <input

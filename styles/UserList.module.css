@@ -105,6 +105,26 @@
   border-radius: 5px;
 }
 
+.change_password_btn{
+  background-color: rgb(0, 0, 0);
+  color: white;
+  padding: 2px 10px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.button_box{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .padding_0 {
   padding: 0px !important;
 }
@@ -186,9 +206,6 @@
   gap: 5px;
 }
 
-
-
-
 /* Responsive Code */
 
 @media (max-width: 769px) {
@@ -203,6 +220,10 @@
   .dashboard_main_box h2 {
     font-size: 25px;
     text-align: center;
+  }
+  .customer_filter_big_box{
+    flex-direction: column;
+    gap: 5px;
   }
 
   .customer_filter_big_box button {

@@ -122,18 +122,12 @@ const Agenttransactions = () => {
                                         <td>{new Date(transaction.created_at).toLocaleString()}</td>
                                         <td>{transaction.status}</td>
                                         <td>
-                                            <button 
-                                                onClick={() => updateTransactionStatus(transaction.id, 'approved')} 
-                                                disabled={updating}
-                                            >
-                                                Approve
-                                            </button>
-                                            <button 
-                                                onClick={() => updateTransactionStatus(transaction.id, 'rejected')} 
-                                                disabled={updating}
-                                            >
-                                                Reject
-                                            </button>
+                                            <div className={styles.action_box}>
+                                                <button onClick={() => updateTransactionStatus(transaction.id, 'approved')}
+                                                    disabled={updating} className={styles.completed_btn}>Approve</button>
+                                                <button onClick={() => updateTransactionStatus(transaction.id, 'rejected')}
+                                                    disabled={updating} className={styles.reject_btn}>Reject</button>
+                                            </div>
                                             {updateError && <p>{updateError}</p>}
                                         </td>
                                     </tr>
