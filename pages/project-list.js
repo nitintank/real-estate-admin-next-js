@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Navbar from "@/components/Navbar";
 import styles from "@/styles/ProjectList.module.css";
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 const ProjectList = () => {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const router = useRouter();
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -51,6 +53,9 @@ const ProjectList = () => {
         }
     };
 
+    const handleEditClick = async (projectId) => {
+        router.push(`/edit-project/${projectId}`);
+    };
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
 
@@ -89,9 +94,7 @@ const ProjectList = () => {
                                         />
                                     </td>
                                     <td>
-                                        {/* <Link href={`/admin-panel/admin-edit-project/${project.project_id}`}>
-                                            <i class='bx bx-edit'></i>
-                                        </Link> */}
+                                        <i className="bx bx-edit" onClick={() => handleEditClick(project.project_id)}></i>
                                         <i className="bx bx-trash" onClick={() => handleDeleteClick(project.project_id)}></i>
                                     </td>
                                 </tr>

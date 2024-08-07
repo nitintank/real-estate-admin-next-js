@@ -57,6 +57,12 @@
     margin: 10px auto;
 }
 
+.errorText {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
 /* Responsive Code */
 
 @media (max-width: 769px) {

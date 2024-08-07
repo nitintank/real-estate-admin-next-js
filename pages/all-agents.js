@@ -34,7 +34,7 @@ const AllAgents = () => {
     }, []);
 
     const handleEditClick = async (agentId) => {
-        router.push(`/admin-panel/admin-edit-agent/${agentId}`);
+        router.push(`/edit-agent-profile/${agentId}`);
     };
 
     const handlePasswordChangeClick = (agent) => {
@@ -49,6 +49,7 @@ const AllAgents = () => {
         setSearchQuery(e.target.value);
     };
 
+
     const filteredAgent = agents.filter(agent =>
         agent.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
         agent.email.toLowerCase().includes(searchQuery.toLowerCase()) &&
@@ -56,6 +57,28 @@ const AllAgents = () => {
         agent.office_phone_number.toLowerCase().includes(searchQuery.toLowerCase()) &&
         agent.address.toLowerCase().includes(searchQuery.toLowerCase())
     );
+    
+    const handleDeleteClick = async (agentId) => {
+        if (confirm('Are you sure you want to delete this agent?')) {
+            try {
+                const response = await fetch(`https://a.khelogame.xyz/agent/${agentId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+    
+                if (!response.ok) {
+                    throw new Error('Failed to delete agent');
+                }
+    
+                setAgents(agents.filter(agent => agent.id !== agentId));
+            } catch (err) {
+                setError(err.message);
+            }
+        }
+    };
     
 
     return (

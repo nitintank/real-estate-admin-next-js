@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from "@/styles/AddProject.module.css";
 import Navbar from "@/components/Navbar";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddProject = () => {
     const [projectName, setProjectName] = useState('');
@@ -31,6 +33,7 @@ const AddProject = () => {
         features: [],
         cleaningAndMaintenance: []
     });
+    const [errors, setErrors] = useState({});
 
     // // Handle file uploads
     const handleFileChange = (e, setState) => {
@@ -38,9 +41,22 @@ const AddProject = () => {
         setState(files);
     };
 
+    const validateForm = () => {
+        const newErrors = {};
+        if (!propertyType) newErrors.propertyType = 'Property type is required';
+        if (!description) newErrors.description = 'Description is required';
+        if (!price) newErrors.price = 'Area is required';
+        if (!projectName) newErrors.projectName = 'Project Name is required';
+        if (!developerName) newErrors.developerName = 'developer Name is required';
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!validateForm()) return;
 
         // Construct the data object to send
         const data = {
@@ -91,6 +107,14 @@ const AddProject = () => {
             images.forEach(file => formData.append('images', file));
             videos.forEach(file => formData.append('videos', file));
 
+            buildings.forEach(building => {
+                building.floors.forEach(floor => {
+                    if (floor.floorPlan) {
+                        formData.append('floorPlans', floor.floorPlan);
+                    }
+                });
+            });
+
             // Make POST request to the API
             const response = await fetch('https://a.khelogame.xyz/add-project', {
                 method: 'POST',
@@ -103,9 +127,11 @@ const AddProject = () => {
             if (response.ok) {
                 const result = await response.json();
                 console.log('Project added successfully:', result);
-                // Handle success message or redirect
+                toast.success('Project added successfully!');
+               
             } else {
                 const error = await response.json();
+                toast.error(`Error: ${errorData.message}`);
                 console.error('Error adding project:', error);
                 // Handle error message
             }
@@ -132,33 +158,48 @@ const AddProject = () => {
         setBuildings(updatedBuildings);
     };
 
+    // const handleFloorChange = (buildingIndex, floorIndex, field, value) => {
+    //     const updatedBuildings = [...buildings];
+    //     updatedBuildings[buildingIndex].floors[floorIndex][field] = value;
+    //     console.log(updatedBuildings, "updatedBuildings");
+    //     setBuildings(updatedBuildings);
+    //     // handleAddBuilding();
+    // };
+
     const handleFloorChange = (buildingIndex, floorIndex, field, value) => {
         const updatedBuildings = [...buildings];
-        updatedBuildings[buildingIndex].floors[floorIndex][field] = value;
-        console.log(updatedBuildings, "updatedBuildings");
+        if (field === 'floorPlan') {
+            updatedBuildings[buildingIndex].floors[floorIndex][field] = value[0]; // Set the first file if multiple files are selected
+        } else {
+            updatedBuildings[buildingIndex].floors[floorIndex][field] = value;
+        }
         setBuildings(updatedBuildings);
-        // handleAddBuilding();
     };
 
     return (
         <>
             <Navbar />
+            <ToastContainer />
             {/* <!-- Dashboard --> */}
             <section className={styles.dashboard_main_box}>
                 <h2>Add New Project</h2>
                 <form onSubmit={handleSubmit} className={styles.formMainBox}>
                     <label htmlFor="projectName">Project Name</label>
                     <input id="projectName" type="text" value={projectName} onChange={e => setProjectName(e.target.value)} required />
+                    {errors.projectName && <p className={styles.errorText}>{errors.projectName}</p>}
                     <label htmlFor="description">Description</label>
                     <textarea id="description" value={description} onChange={e => setDescription(e.target.value)} required rows="4" cols="50" />
+                    {errors.description && <p className={styles.errorText}>{errors.description}</p>}
                     <label htmlFor="price">Price</label>
                     <input id="price" type="number" value={price} onChange={e => setPrice(e.target.value)} required />
+                    {errors.price && <p className={styles.errorText}>{errors.price}</p>}
                     <label htmlFor="images">Images</label>
                     <input id="images" type="file" multiple onChange={e => handleFileChange(e, setImages)} accept="image/*" />
                     <label htmlFor="videos">Videos</label>
                     <input id="videos" type="file" multiple onChange={e => handleFileChange(e, setVideos)} accept="video/*" />
                     <label htmlFor="developerName">Developer Name</label>
                     <input id="developerName" type="text" value={developerName} onChange={e => setDeveloperName(e.target.value)} required />
+                    {errors.developerName && <p className={styles.errorText}>{errors.developerName}</p>}
                     <label htmlFor="location">Location</label>
                     <input id="location" type="text" value={location} onChange={e => setLocation(e.target.value)} required />
                     <label htmlFor="deliveryDate">Delivery Date</label>
@@ -197,6 +238,7 @@ const AddProject = () => {
                         <option value="Agricultural Land">Agricultural Land</option>
                         <option value="Farm House">Farm House</option>
                     </select>
+                    {errors.propertyType && <p className={styles.errorText}>{errors.propertyType}</p>}
                     <label htmlFor="numberOfBuildings">Number of Buildings</label>
                     <input
                         id="numberOfBuildings"
@@ -210,6 +252,7 @@ const AddProject = () => {
                         min="1"
                         required
                     />
+                    {errors.projectName && <p className={styles.errorText}>{errors.projectName}</p>}
                     {buildings.map((building, buildingIndex) => (
                         <div key={buildingIndex} className={styles.building_box_css}>
                             <label>Building {buildingIndex + 1}</label>

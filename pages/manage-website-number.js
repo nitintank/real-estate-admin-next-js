@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styles from "@/styles/ManageWebsiteNumber.module.css";
 import Navbar from "@/components/Navbar";
 import { useRouter } from 'next/router';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ManageWebsiteNumber = () => {
     const [supportcontact, setSupportcontact] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    
     const router = useRouter();
 
     const [formData, setFormData] = useState({
@@ -23,8 +26,23 @@ const ManageWebsiteNumber = () => {
         }));
     };
 
+    // const validateForm = () => {
+    //     const newErrors = {};
+    //     const { help_contact_number, support_contact_number, emergency_contact_number } = formData;
+    
+    //     if (!help_contact_number) newErrors.help_contact_number = 'Help Contact Number is required';
+    //     if (!support_contact_number) newErrors.support_contact_number = 'Support Contact Number is required';
+    //     if (!emergency_contact_number) newErrors.emergency_contact_number = 'Emergency Contact Number is required';
+    
+    //     setError(newErrors);
+    
+    //     return Object.keys(newErrors).length === 0;
+    // };
+    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // if (!validateForm()) return;
         
         try {
             const response = await fetch('https://a.khelogame.xyz/admin_support_contact', {
@@ -46,8 +64,10 @@ const ManageWebsiteNumber = () => {
 
             // Handle success, maybe show a success message or redirect
             console.log('Agent contact information saved successfully');
+            toast.success('Support Number added successfully!');
         } catch (error) {
             console.error('Error saving agent contact information:', error.message);
+            toast.error(`Error: ${errorData.message}`);
             // Handle error, maybe show an error message
         }
     };
@@ -99,14 +119,18 @@ const ManageWebsiteNumber = () => {
     return (
         <>
             <Navbar />
+            <ToastContainer />
             {/* <!-- Dashboard --> */}
             <section className={styles.dashboard_main_box}>
                 <h2>Manage Website Number</h2>
                 <form onSubmit={handleSubmit} className={styles.website_form_big_box}>
                     <input type="text" placeholder="Help Contact Number" name="help_contact_number" value={formData.help_contact_number}
                             onChange={handleChange} />
+                    {/* {error.help_contact_number && <p className={styles.errorText}>{error.help_contact_number}</p>}            */}
                     <input type="text" placeholder="Support Contact Number" name="support_contact_number" value={formData.support_contact_number} onChange={handleChange} />
+                    {/* {error.support_contact_number && <p className={styles.errorText}>{error.support_contact_number}</p>}     */}
                     <input type="text" placeholder="Emergency Contact Number" name="emergency_contact_number" value={formData.emergency_contact_number} onChange={handleChange} />
+                    {/* {error.emergency_contact_number && <p className={styles.errorText}>{error.emergency_contact_number}</p>}     */}
                     <input type="submit" value="Save" />
                 </form>
                 <div className={styles.tableBigBox}>

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styles from "@/styles/AddAgent.module.css";
 import Navbar from "@/components/Navbar";
 import Image from 'next/image';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddAgent = () => {
     const [formData, setFormData] = useState({
@@ -20,6 +22,7 @@ const AddAgent = () => {
         image: null
     });
     const [imagePreview, setImagePreview] = useState(null);
+    const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -32,8 +35,29 @@ const AddAgent = () => {
         }
     };
 
+    const validateForm = () => {
+        const newErrors = {};
+    
+        // Access values from formData
+        const { name, email, phoneNumber, password, officePhoneNumber } = formData;
+    
+        if (!name) newErrors.name = 'Name is required';
+        if (!email) newErrors.email = 'Email is required';
+        if (!phoneNumber) newErrors.phoneNumber = 'Phone Number is required';
+        if (!password) newErrors.password = 'Password is required';
+        if (!officePhoneNumber) newErrors.officePhoneNumber = 'Office phone number is required';
+    
+        setErrors(newErrors);
+    
+        return Object.keys(newErrors).length === 0;
+    };
+    
+
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!validateForm()) return;
 
         const form = new FormData();
         form.append('name', formData.name);
@@ -61,11 +85,15 @@ const AddAgent = () => {
 
             const result = await response.json();
             if (response.ok) {
-                alert('Agent created successfully');
+                toast.success('Agent created successfully');
+                console.log(result)
             } else {
-                alert(`Error: ${result.error}`);
+                const errorData = await response.json();
+                toast.error(`Error: ${errorData.message}`);
+                console.error('Error:',  errorData);
             }
         } catch (error) {
+            
             console.error('Error:', error);
             alert('An error occurred. Please try again later.');
         }
@@ -74,15 +102,22 @@ const AddAgent = () => {
     return (
         <>
             <Navbar />
+            <ToastContainer />
             {/* <!-- Dashboard --> */}
             <section className={styles.dashboard_main_box}>
                 <h2>Add New Agent</h2>
                 <form onSubmit={handleSubmit} className={styles.agent_form_big_box}>
                     <input type="text" placeholder="Add Agent Name" name="name" value={formData.name} onChange={handleChange} />
+                    {errors.name && <p className={styles.errorText}>{errors.name}</p>}    
                     <input type="text" placeholder="Add Email Id" name="email" value={formData.email} onChange={handleChange} />
+                    {errors.email && <p className={styles.errorText}>{errors.email}</p>}    
                     <input type="text" placeholder="Add Phone Number" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange}/>
+                    {errors.phoneNumber && <p className={styles.errorText}>{errors.phoneNumber}</p>}
+                    
                     <input type="text" placeholder="Add Password" name="password" value={formData.password} onChange={handleChange}/>
+                    {errors.password && <p className={styles.errorText}>{errors.password}</p>}    
                     <input type="text" placeholder="Add Office Phone Number" name="officePhoneNumber" value={formData.officePhoneNumber} onChange={handleChange} />
+                    {errors.officePhoneNumber && <p className={styles.errorText}>{errors.officePhoneNumber}</p>}    
                     <textarea id="" placeholder="Add Address" name="address" value={formData.address} onChange={handleChange}></textarea>
                     <textarea id="" placeholder="Add Description" name="description" value={formData.description} onChange={handleChange}></textarea>
                     <input type="text" placeholder="Add Experience" name="experience" value={formData.experience} onChange={handleChange} />

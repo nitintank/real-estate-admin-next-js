@@ -183,6 +183,23 @@ const Navbar = () => {
                                 <span className={styles.navlink}>All transtion-approval</span>
                             </Link>
                         </li>
+                        <li className={styles.item}>
+                            <Link href="/agent-list-propety" className={styles.nav_link}>
+                                <span className={styles.navlink_icon}>
+                                    <i className='bx bx-list-ol'></i>
+                                </span>
+                                <span className={styles.navlink}>Agent List for Approval</span>
+                            </Link>
+                        </li>
+                        
+                        <li className={styles.item}>
+                            <Link href="/admin_wallet_coin" className={styles.nav_link}>
+                                <span className={styles.navlink_icon}>
+                                    <i className='bx bx-list-ol'></i>
+                                </span>
+                                <span className={styles.navlink}>Wallet Coins</span>
+                            </Link>
+                        </li>
                     </ul>
                 </div>
             </nav>

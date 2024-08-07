@@ -133,6 +133,18 @@
     font-size: 12px;
 }
 
+.star-rating {
+    font-size: 20px; /* Adjust size as needed */
+    color: #ffd700; /* Gold color for stars */
+  }
+  
+  .star-rating .fa-star {
+    color: #ddd; /* Gray color for unfilled stars */
+  }
+  
+  .star-rating .fa-star.checked {
+    color: #ffd700; /* Gold color for filled stars */
+  }
 /* Responsive Code */
 
 @media (max-width: 769px) {

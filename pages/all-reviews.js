@@ -3,9 +3,10 @@ import styles from "@/styles/AllReviews.module.css";
 import Navbar from "@/components/Navbar";
 import Link from 'next/link';
 
+
 const AllReviews = () => {
     const [reviews, setReviews] = useState([]);
-    const [filter, setFilter] = useState('all'); // State to manage the current filter status
+    const [filter, setFilter] = useState('all');
 
     useEffect(() => {
         const fetchReviews = async () => {
@@ -64,6 +65,8 @@ const AllReviews = () => {
         return review.status === filter;
     });
 
+    
+
     return (
         <>
             <Navbar />
@@ -121,18 +124,20 @@ const AllReviews = () => {
                         </thead>
                         <tbody>
                             {filteredReviews.map(review => (
-                                
                                 <tr key={review.review_id}>
                                     <td>
                                         <div className={styles.review_content_box}>
-                                            <h4>{review.name}</h4>
+                                            <h4><img src="/images/contact-card.png" alt="" style={{ height: "40px" }} />{review.name}</h4>
+                                           
+                                               
+                                                <p>{review.rating}</p>
                                             <p>{review.comment}</p>
                                         </div>
                                     </td>
                                     <td>
                                         <div className={styles.property_name_box}>
-                                        <Link href={`/property?id=${review.property_id}`}>
-                                            <h4>{review.property_name}</h4>
+                                            <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${review.property_id}`}>
+                                                <h4>{review.property_name}</h4>
                                             </Link>
                                             <p>AED {review.price}</p>
                                         </div>
@@ -151,7 +156,7 @@ const AllReviews = () => {
                 </div>
             </section>
         </>
-    )
+    );
 }
 
 export default AllReviews;

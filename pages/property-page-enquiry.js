@@ -40,6 +40,8 @@ const PropertyPageEnquiry = () => {
                         <thead>
                             <tr>
                                 <th>S No.</th>
+                                <th>Property Owner Name</th>
+                                <th>Property Name</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone Number</th>
@@ -51,6 +53,8 @@ const PropertyPageEnquiry = () => {
                             {inquiries.map((inquiry, index) => (
                                 <tr key={inquiry.id}>
                                     <td>{index + 1}</td>
+                                    <td>{inquiry.user_name}</td>
+                                    <td>{inquiry.property_name}</td>
                                     <td>{inquiry.name}</td>
                                     <td>{inquiry.email}</td>
                                     <td>{inquiry.phone_number}</td>
