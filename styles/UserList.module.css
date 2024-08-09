@@ -10,7 +10,7 @@
 }
 
 .dashboard_main_box h2 {
-  font-size: 30px;
+  font-size: 25px;
   line-height: 1;
 }
 
@@ -73,6 +73,7 @@
   border: 1px solid #ddd;
   padding: 8px;
   white-space:nowrap;
+  font-size: 14px;
 }
 
 .customers tr:nth-child(even) {
@@ -143,6 +144,14 @@
   border-radius: 5px;
 }
 
+.action_box{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+}
+
 .approve_btn {
   background-color: green;
   color: white;
@@ -204,6 +213,12 @@
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.agent_profile_img{
+  width: auto;
+  height: 40px;
+  border-radius: 5px;
 }
 
 /* Responsive Code */

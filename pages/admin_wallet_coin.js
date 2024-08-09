@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from "@/components/Navbar";
-import styles from "@/styles/AddAgent.module.css";
+import styles from "@/styles/WalletCoin.module.css";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -66,19 +66,19 @@ const AddWalletCoin = () => {
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
-        .then(data => {
-            setLoading(false);
-           
-            toast.success('Wallet created successfully!');
-            fetchPendingRequests(); // Refresh pending requests
-        })
-        .catch(error => {
-            setLoading(false);
-            console.error("Error creating wallet!", error);
-            toast.error(`Error: ${errorData.message}`);
-            // alert('Error creating wallet');
-        });
+            .then(response => response.json())
+            .then(data => {
+                setLoading(false);
+
+                toast.success('Wallet created successfully!');
+                fetchPendingRequests(); // Refresh pending requests
+            })
+            .catch(error => {
+                setLoading(false);
+                console.error("Error creating wallet!", error);
+                toast.error(`Error: ${errorData.message}`);
+                // alert('Error creating wallet');
+            });
     };
 
     const fetchPendingRequests = () => {
@@ -88,15 +88,15 @@ const AddWalletCoin = () => {
                 'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
-        .then(response => response.json())
-        .then(data => {
-            setLoading(false);
-            setRequests(data);
-        })
-        .catch(error => {
-            setLoading(false);
-            console.error("Error fetching pending requests!", error);
-        });
+            .then(response => response.json())
+            .then(data => {
+                setLoading(false);
+                setRequests(data);
+            })
+            .catch(error => {
+                setLoading(false);
+                console.error("Error fetching pending requests!", error);
+            });
     };
 
     const handleRequest = (requestId, status) => {
@@ -109,19 +109,19 @@ const AddWalletCoin = () => {
             },
             body: JSON.stringify({ status })
         })
-        .then(response => response.json())
-        .then(data => {
-            setLoading(false);
-            // alert(`Request ${status} successfully`);
-            toast.success('Request ${status} successfully!');
-            fetchPendingRequests();
-        })
-        .catch(error => {
-            setLoading(false);
-            console.error(`Error ${status === 'approved' ? 'approving' : 'rejecting'} request!`, error);
-            // alert(`Error ${status === 'approved' ? 'approving' : 'rejecting'} request`);
-            toast.error(`Error ${status === 'approved' ? 'approving' : 'rejecting'} request`);
-        });
+            .then(response => response.json())
+            .then(data => {
+                setLoading(false);
+                // alert(`Request ${status} successfully`);
+                toast.success('Request ${status} successfully!');
+                fetchPendingRequests();
+            })
+            .catch(error => {
+                setLoading(false);
+                console.error(`Error ${status === 'approved' ? 'approving' : 'rejecting'} request!`, error);
+                // alert(`Error ${status === 'approved' ? 'approving' : 'rejecting'} request`);
+                toast.error(`Error ${status === 'approved' ? 'approving' : 'rejecting'} request`);
+            });
     };
 
     return (
@@ -131,31 +131,23 @@ const AddWalletCoin = () => {
             <section className={styles.dashboard_main_box}>
                 <h2>Add Wallet Coin</h2>
                 <form onSubmit={handleSubmit} className={styles.agent_form_big_box}>
-                    <div>
-                        <label>Agent</label>
-                        <select value={selectedAgent} onChange={handleAgentChange} required>
-                            <option value="">Select an Agent</option>
-                            {agents.map(agent => (
-                                <option key={agent.id} value={agent.id}>{agent.name}</option>
+                    <select value={selectedAgent} onChange={handleAgentChange} required>
+                        <option value="">Select Agent</option>
+                        {agents.map(agent => (
+                            <option key={agent.id} value={agent.id}>{agent.name}</option>
+                        ))}
+                    </select>
+                    {selectedAgent && (<>
+                        <select value={selectedProperty} onChange={e => setSelectedProperty(e.target.value)} required>
+                            <option value="">Select Property</option>
+                            {properties.map(property => (
+                                <option key={property.id} value={property.id}>{property.property_name}</option>
                             ))}
                         </select>
-                    </div>
-                    {selectedAgent && (
-                        <div>
-                            <label>Property</label>
-                            <select value={selectedProperty} onChange={e => setSelectedProperty(e.target.value)} required>
-                                <option value="">Select a Property</option>
-                                {properties.map(property => (
-                                    <option key={property.id} value={property.id}>{property.property_name}</option>
-                                ))}
-                            </select>
-                        </div>
+                    </>
                     )}
-                    <div>
-                        <label>Wallet Coins</label>
-                        <input type="text" value={coins} onChange={e => setCoins(e.target.value)} required />
-                    </div>
-                    <button type="submit" disabled={loading}>Submit</button>
+                    <input type="text" value={coins} onChange={e => setCoins(e.target.value)} placeholder='Add Coins' required />
+                    <input type="submit" disabled={loading} value="Submit" />
                 </form>
 
                 <h2>Pending Requests</h2>

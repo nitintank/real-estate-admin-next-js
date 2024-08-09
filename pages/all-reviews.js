@@ -127,10 +127,8 @@ const AllReviews = () => {
                                 <tr key={review.review_id}>
                                     <td>
                                         <div className={styles.review_content_box}>
-                                            <h4><img src="/images/contact-card.png" alt="" style={{ height: "40px" }} />{review.name}</h4>
-                                           
-                                               
-                                                <p>{review.rating}</p>
+                                            <h4>{review.name}</h4>
+                                            <p>{review.rating} Star</p>
                                             <p>{review.comment}</p>
                                         </div>
                                     </td>

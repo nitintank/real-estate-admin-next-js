@@ -34,7 +34,7 @@ const Navbar = () => {
 
                 <div className={styles.navbar_content}>
                     <Link href="/profile"><Image width={200} height={200} src="/images/profile.jpg" alt="" className={styles.profile} /></Link>
-                    <button className={styles.logout_btn} onClick={handleLogout}><i class='bx bx-log-out'></i> Log Out</button>
+                    <button className={styles.logout_btn} onClick={handleLogout}><i className='bx bx-log-out'></i> Log Out</button>
                 </div>
             </nav>
 
@@ -89,7 +89,7 @@ const Navbar = () => {
                     </ul>
 
                     <ul className={styles.menu_items}>
-                        {/* <!-- duplicate these li tag if you want to add or remove navlink only --> */}
+
                         {/* <!-- Start --> */}
                         <li className={styles.item}>
                             <Link href="/property-list" className={styles.nav_link}>
@@ -107,6 +107,14 @@ const Navbar = () => {
                                     <i className='bx bxs-user-pin'></i>
                                 </span>
                                 <span className={styles.navlink}>User List</span>
+                            </Link>
+                        </li>
+                        <li className={styles.item}>
+                            <Link href="/agent-list-propety" className={styles.nav_link}>
+                                <span className={styles.navlink_icon}>
+                                    <i className='bx bxs-landscape'></i>
+                                </span>
+                                <span className={styles.navlink}>Agent Property List</span>
                             </Link>
                         </li>
                         <li className={styles.item}>
@@ -160,42 +168,32 @@ const Navbar = () => {
                         <li className={styles.item}>
                             <Link href="/all-subscription-plan" className={styles.nav_link}>
                                 <span className={styles.navlink_icon}>
-                                    <i className='bx bx-list-ol'></i>
-                                  
+                                    <i className='bx bxs-paper-plane'></i>
                                 </span>
-                                <span className={styles.navlink}>Subscription plan</span>
+                                <span className={styles.navlink}>Subscription Plan</span>
                             </Link>
                         </li>
                         <li className={styles.item}>
                             <Link href="/all-user-subscription" className={styles.nav_link}>
                                 <span className={styles.navlink_icon}>
-                                    <i className='bx bx-list-ol'></i>
+                                    <i className='bx bxs-moon'></i>
                                 </span>
-                                <span className={styles.navlink}>All User Subscription Plan</span>
+                                <span className={styles.navlink}>User Subscription</span>
                             </Link>
                         </li>
-                       
+
                         <li className={styles.item}>
                             <Link href="/all-transtion-approval-list" className={styles.nav_link}>
                                 <span className={styles.navlink_icon}>
-                                    <i className='bx bx-list-ol'></i>
+                                    <i className='bx bxs-sticker'></i>
                                 </span>
-                                <span className={styles.navlink}>All transtion-approval</span>
+                                <span className={styles.navlink}>Transtion Approval</span>
                             </Link>
                         </li>
-                        <li className={styles.item}>
-                            <Link href="/agent-list-propety" className={styles.nav_link}>
-                                <span className={styles.navlink_icon}>
-                                    <i className='bx bx-list-ol'></i>
-                                </span>
-                                <span className={styles.navlink}>Agent List for Approval</span>
-                            </Link>
-                        </li>
-                        
                         <li className={styles.item}>
                             <Link href="/admin_wallet_coin" className={styles.nav_link}>
                                 <span className={styles.navlink_icon}>
-                                    <i className='bx bx-list-ol'></i>
+                                    <i className='bx bxs-coin'></i>
                                 </span>
                                 <span className={styles.navlink}>Wallet Coins</span>
                             </Link>

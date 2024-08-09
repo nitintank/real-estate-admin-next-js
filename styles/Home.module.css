@@ -27,7 +27,7 @@
 .dashboard_content_cards {
   text-decoration: none;
   color: black;
-  width: 32.5%;
+  width: 15%;
   background-color: white;
   padding: 20px;
   border-radius: 15px;
@@ -39,7 +39,7 @@
 
 .dashboard_content_cards img {
   width: auto;
-  height: 60px;
+  height: 50px;
 }
 
 .dashboard_content_cards p {
@@ -256,8 +256,8 @@
   }
 
   .dashboard_content_cards img {
-    width: 40px;
-    height: auto;
+    width: auto;
+    height: 40px;
   }
 
   .dashboard_content_cards p {

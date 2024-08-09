@@ -112,9 +112,8 @@ const AgentList = () => {
         <>
             <Navbar />
             <section className={styles.dashboard_main_box}>
-                <h2>Agent Properties List</h2>
                 <div className={styles.customer_filter_big_box}>
-                    {/* <button><i className='bx bxs-plus-circle'></i> Add New Customer</button> */}
+                    <h2>Agent Properties List</h2>
                     <div className={styles.search_customer_box}>
                         <input
                             type="text"
@@ -155,12 +154,14 @@ const AgentList = () => {
                                         </td>
                                         <td>{agent.agent_phone_number}</td>
                                         <td>
-                                            <button onClick={() => toggleViewProperties(agentId)} className={styles.hide_view_btn}>
-                                                {viewProperties[agentId] ? 'Hide' : 'View'}
-                                            </button>
-                                            <button onClick={() => handlePasswordChangeClick(agent)} className={styles.change_password_btn}>
-                                                Change Password
-                                            </button>
+                                            <div className={styles.action_box}>
+                                                <button onClick={() => toggleViewProperties(agentId)} className={styles.hide_view_btn}>
+                                                    {viewProperties[agentId] ? 'Hide' : 'View'}
+                                                </button>
+                                                <button onClick={() => handlePasswordChangeClick(agent)} className={styles.change_password_btn}>
+                                                    Change Password
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                     {viewProperties[agentId] && (
@@ -185,11 +186,11 @@ const AgentList = () => {
                                                                 <td>{property.property_type}</td>
                                                                 <td>{property.property_subtype}</td>
                                                                 <td>{property.status}</td>
-                                                                <td>
-                                                                    <button onClick={() => updatePropertyStatus(property.property_id, 'approved')} className={styles.status_btn}>
+                                                                <td className={styles.button_mega_box}>
+                                                                    <button onClick={() => updatePropertyStatus(property.property_id, 'approved')} disabled={property.status === 'approved'} className={styles.approve_btn}>
                                                                         Approve
                                                                     </button>
-                                                                    <button onClick={() => updatePropertyStatus(property.property_id, 'rejected')} className={styles.status_btn}>
+                                                                    <button onClick={() => updatePropertyStatus(property.property_id, 'rejected')} disabled={property.status === 'rejected'} className={styles.reject_btn}>
                                                                         Reject
                                                                     </button>
                                                                 </td>

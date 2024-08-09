@@ -161,9 +161,6 @@ export default function Home() {
     fetchAgentTransactions();
   }, []);
 
-
-
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
@@ -200,13 +197,13 @@ export default function Home() {
 
           <Link href={`/all-transtion-approval-list?status=approved`} className={styles.dashboard_content_cards}>
             <Image width={200} height={200} src="/images/ad-ico-3.png" alt="" />
-            <p>Transactions Approved</p>
+            <p>Transactions</p>
             <h4>{transactions.length}</h4>
           </Link>
 
           <Link href={`/all-user-subscription`} className={styles.dashboard_content_cards}>
             <Image width={200} height={200} src="/images/ad-ico-4.png" alt="" />
-            <p>Subscription User</p>
+            <p>Subscription</p>
             <h4>{plans.length}</h4>
           </Link>
         </div>

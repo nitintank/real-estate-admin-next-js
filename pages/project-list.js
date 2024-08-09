@@ -94,8 +94,10 @@ const ProjectList = () => {
                                         />
                                     </td>
                                     <td>
-                                        <i className="bx bx-edit" onClick={() => handleEditClick(project.project_id)}></i>
-                                        <i className="bx bx-trash" onClick={() => handleDeleteClick(project.project_id)}></i>
+                                        <div className={styles.action_box}>
+                                            <i className="bx bx-edit" onClick={() => handleEditClick(project.project_id)}></i>
+                                            <i className="bx bx-trash" onClick={() => handleDeleteClick(project.project_id)}></i>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}

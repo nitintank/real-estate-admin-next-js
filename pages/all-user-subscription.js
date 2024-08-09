@@ -41,7 +41,7 @@ const UserSubscriptionPlans = () => {
         <>
             <Navbar />
             <section className={styles.dashboard_main_box}>
-                <h2>All User Purchased Subscription Plans</h2>
+                <h2>All User Subscription List</h2>
                 {loading ? (
                     <p>Loading subscription plans...</p>
                 ) : error ? (
@@ -61,7 +61,7 @@ const UserSubscriptionPlans = () => {
                             <tbody>
                                 {plans.map((plan,index) => (
                                     <tr key={plan.user_id}>
-                                        <tr>{index+1}</tr>
+                                        <td>{index+1}</td>
                                         <td><b>{plan.subscription.plan_name}</b></td>
                                         <td>{plan.username}</td>
                                         <td>{plan.email}</td>

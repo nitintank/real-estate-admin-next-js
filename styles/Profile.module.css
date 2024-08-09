@@ -10,7 +10,7 @@
   }
   
   .dashboard_main_box h2 {
-    font-size: 30px;
+    font-size: 25px;
     line-height: 1;
   }
 
@@ -24,7 +24,7 @@
 }
 
 .mainContentBox h2 {
-    font-size: 30px;
+    font-size: 22px;
     font-weight: 600;
     margin-bottom: 10px;
 }
@@ -81,7 +81,7 @@
 .userProfileBox button{
     width: 125px;
     padding: 6px 20px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     background-color: #1085FF;
     border-radius: 5px;
@@ -91,7 +91,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 5px;
+}
+
+.userProfileBox button i{
+    font-size: 16px;
 }
 
 .error{
