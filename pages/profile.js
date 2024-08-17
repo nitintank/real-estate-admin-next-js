@@ -126,7 +126,7 @@ const Profile = () => {
                                     readOnly />
                             </div>
                             <div className={styles.formInnerBox1}>
-                                <button type="submit">Update <i class="fa-solid fa-arrow-right"></i></button>
+                                <button type="submit">Update <i class='bx bxs-right-arrow-circle'></i></button>
                             </div>
                             {profileSuccessMessage && <p className={styles.success}>{profileSuccessMessage}</p>}
                         </form>
@@ -142,7 +142,7 @@ const Profile = () => {
                                 <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password*" />
                             </div>
                             <div className={styles.formInnerBox1}>
-                                <button type="submit">Update <i class="fa-solid fa-arrow-right"></i></button>
+                                <button type="submit">Update <i class='bx bxs-right-arrow-circle'></i></button>
                             </div>
                         </form>
                         {error && <p className={styles.error}>{error}</p>}

@@ -10,7 +10,7 @@
 }
 
 .dashboard_main_box h2 {
-  font-size: 30px;
+  font-size: 25px;
   line-height: 1;
 }
 
@@ -81,6 +81,7 @@
 .customers th {
   border: 1px solid #ddd;
   padding: 8px;
+  font-size: 14px;
 }
 
 .customers tr:nth-child(even) {
@@ -100,7 +101,7 @@
 }
 
 .property_image_css{
-  width: 100px;
+  width: 50px;
   height: auto;
   margin: auto;
   display: block;
@@ -122,6 +123,8 @@
     font-size: 25px;
     text-align: center;
   }
+
+  /* Property Filter Big Box */
 
   .property_filter_big_box{
     flex-wrap: wrap;

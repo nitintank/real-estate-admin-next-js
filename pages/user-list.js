@@ -117,13 +117,12 @@ const UserList = () => {
             <Navbar />
             {/* <!-- Dashboard --> */}
             <section className={styles.dashboard_main_box}>
-                <h2>User List</h2>
                 <div className={styles.customer_filter_big_box}>
-                    <button><i className='bx bxs-plus-circle'></i> Add New Customer</button>
+                    <h2>User List</h2>
                     <div className={styles.search_customer_box}>
                         <input
                             type="text"
-                            placeholder="Search Customer By Name, Email, Phone Number"
+                            placeholder="Search By Name, Email, Phone Number"
                             value={searchQuery}
                             onChange={handleSearchChange}
                         />
@@ -150,12 +149,14 @@ const UserList = () => {
                                         <td>{user.email}</td>
                                         <td>{user.phone_number}</td>
                                         <td>
-                                            <button onClick={() => toggleViewProperties(user.user_id)} className={styles.hide_view_btn}>
-                                                {viewProperties[user.user_id] ? 'Hide' : 'View'}
-                                            </button>
-                                            <button onClick={() => handlePasswordChangeClick(user)} className={styles.change_password_btn}>
-                                                Change Password
-                                            </button>
+                                            <div className={styles.button_box}>
+                                                <button onClick={() => toggleViewProperties(user.user_id)} className={styles.hide_view_btn}>
+                                                    {viewProperties[user.user_id] ? 'Hide' : 'View'}
+                                                </button>
+                                                <button onClick={() => handlePasswordChangeClick(user)} className={styles.change_password_btn}>
+                                                    Change Password
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                     {viewProperties[user.user_id] && (

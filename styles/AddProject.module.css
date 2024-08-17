@@ -10,7 +10,7 @@
 }
 
 .dashboard_main_box h2 {
-    font-size: 30px;
+    font-size: 25px;
     line-height: 1;
 }
 
@@ -21,6 +21,10 @@
     flex-direction: column;
     gap: 5px;
     margin-top: 10px;
+}
+
+.formMainBox label{
+    font-size: 14px;
 }
 
 .formMainBox input {
@@ -120,4 +124,22 @@
     color: red;
     font-size: 0.875rem;
     margin-top: 0.25rem;
+  }
+
+  /* Responsive Code */
+
+@media (max-width: 769px) {
+    .dashboard_main_box {
+      width: 100%;
+      margin-left: 0px;
+      height: calc(100vh - 65px);
+      margin-top: 65px;
+      padding: 10px;
+    }
+  
+    .dashboard_main_box h2 {
+      font-size: 25px;
+      text-align: center;
+    }
+
   }

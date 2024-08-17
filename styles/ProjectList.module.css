@@ -10,7 +10,7 @@
   }
   
   .dashboard_main_box h2 {
-    font-size: 30px;
+    font-size: 25px;
     line-height: 1;
   }
   
@@ -31,6 +31,7 @@
   .customers th {
     border: 1px solid #ddd;
     padding: 8px;
+    font-size: 14px;
   }
   
   .customers tr:nth-child(even) {
@@ -55,6 +56,13 @@
       cursor: pointer;
       margin: auto;
       display: block;
+  }
+
+  .action_box{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
   
   /* Responsive Code */
@@ -85,8 +93,8 @@
   }
   
   .preview_img{
-    width: 150px;
-    height: auto;
+    width: auto;
+    height: 70px;
     border-radius: 10px;
     margin: auto;
     display: block;

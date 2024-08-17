@@ -10,7 +10,7 @@
 }
 
 .dashboard_main_box h2 {
-  font-size: 30px;
+  font-size: 25px;
   line-height: 1;
 }
 
@@ -29,10 +29,18 @@
 
 .agent_form_big_box input{
     border: 1px solid #ebebeb;
-    padding: 10px;
+    padding: 5px 10px;
     color: black;
     font-size: 14px;
     border-radius: 10px;
+}
+
+.agent_form_big_box select{
+  border: 1px solid #ebebeb;
+  padding: 5px 10px;
+  color: black;
+  font-size: 14px;
+  border-radius: 10px;
 }
 
 .agent_form_big_box textarea{

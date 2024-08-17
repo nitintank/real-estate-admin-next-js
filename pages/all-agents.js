@@ -49,7 +49,6 @@ const AllAgents = () => {
         setSearchQuery(e.target.value);
     };
 
-
     const filteredAgent = agents.filter(agent =>
         agent.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         agent.email.toLowerCase().includes(searchQuery.toLowerCase()) ||

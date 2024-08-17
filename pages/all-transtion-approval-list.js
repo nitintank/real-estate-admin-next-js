@@ -3,6 +3,7 @@ import styles from "@/styles/ManageWebsiteNumber.module.css";
 import Navbar from "@/components/Navbar";
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Agenttransactions = () => {
     const [transactions, setTransactions] = useState([]);
@@ -117,35 +118,29 @@ const Agenttransactions = () => {
                                         </td>
                                         <td>{transaction.property_detail}</td>
                                         <td>
-                                            <a href={`https://a.khelogame.xyz/${transaction.tnc_document_contract}`} target="_blank" rel="noopener noreferrer">
+                                            <Link className={styles.docunment_box} href={`https://a.khelogame.xyz/${transaction.tnc_document_contract}`} target="_blank" rel="noopener noreferrer">
                                                 View Document
-                                            </a>
+                                            </Link>
                                         </td>
                                         <td>
-                                            <a href={`https://a.khelogame.xyz/${transaction.owners_document}`} target="_blank" rel="noopener noreferrer">
+                                            <Link className={styles.docunment_box} href={`https://a.khelogame.xyz/${transaction.owners_document}`} target="_blank" rel="noopener noreferrer">
                                                 View Document
-                                            </a>
+                                            </Link>
                                         </td>
                                         <td>
-                                            <a href={`https://a.khelogame.xyz/${transaction.payment_cheques}`} target="_blank" rel="noopener noreferrer">
+                                            <Link className={styles.docunment_box} href={`https://a.khelogame.xyz/${transaction.payment_cheques}`} target="_blank" rel="noopener noreferrer">
                                                 View Cheque
-                                            </a>
+                                            </Link>
                                         </td>
                                         <td>{new Date(transaction.created_at).toLocaleString()}</td>
                                         <td>{transaction.status}</td>
                                         <td>
-                                            <button 
-                                                onClick={() => updateTransactionStatus(transaction.id, 'approved')} 
-                                                disabled={updating}
-                                            >
-                                                Approve
-                                            </button>
-                                            <button 
-                                                onClick={() => updateTransactionStatus(transaction.id, 'rejected')} 
-                                                disabled={updating}
-                                            >
-                                                Reject
-                                            </button>
+                                            <div className={styles.action_box}>
+                                                <button onClick={() => updateTransactionStatus(transaction.id, 'approved')}
+                                                    disabled={updating} className={styles.completed_btn}>Approve</button>
+                                                <button onClick={() => updateTransactionStatus(transaction.id, 'rejected')}
+                                                    disabled={updating} className={styles.reject_btn}>Reject</button>
+                                            </div>
                                             {updateError && <p>{updateError}</p>}
                                         </td>
                                     </tr>

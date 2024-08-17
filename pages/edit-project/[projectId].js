@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styles from "@/styles/AddProject.module.css";
 import Navbar from "@/components/Navbar";
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const EditProject = () => {
     const router = useRouter();
-    const {projectId} = router.query; 
+    const { projectId } = router.query;
     const [projectData, setProjectData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -15,8 +16,8 @@ const EditProject = () => {
     const [images, setImages] = useState([]);
     const [videos, setVideos] = useState([]);
     const [imagePreviews, setImagePreviews] = useState([]);
-const [videoPreviews, setVideoPreviews] = useState([]);
-const [floorPlanPreviews, setFloorPlanPreviews] = useState([]);
+    const [videoPreviews, setVideoPreviews] = useState([]);
+    const [floorPlanPreviews, setFloorPlanPreviews] = useState([]);
 
     const [developerName, setDeveloperName] = useState('');
     const [location, setLocation] = useState('');
@@ -55,7 +56,7 @@ const [floorPlanPreviews, setFloorPlanPreviews] = useState([]);
             floorPlanPreviews.flat().forEach(url => URL.revokeObjectURL(url));
         };
     }, [imagePreviews, videoPreviews, floorPlanPreviews]);
-    
+
 
     const fetchProjectData = async () => {
         try {
@@ -69,7 +70,7 @@ const [floorPlanPreviews, setFloorPlanPreviews] = useState([]);
             }
             const data = await response.json();
             setProjectData(data);
-    
+
             // Utility function to safely format dates
             const formatDate = (dateStr) => {
                 if (dateStr) {
@@ -78,8 +79,7 @@ const [floorPlanPreviews, setFloorPlanPreviews] = useState([]);
                 }
                 return '';
             };
-            console.log(data,"sssssssssssssssssssssss");
-    
+
             // Set form fields with fetched data
             setProjectName(data.project.project_name || '');
             setDescription(data.project.description || '');
@@ -99,7 +99,7 @@ const [floorPlanPreviews, setFloorPlanPreviews] = useState([]);
             setPropertyType(data.project.property_type || '');
             setNumberOfBuildings((data.buildings || []).length);
 
-                
+
             setBuildings((data.buildings || []).map(building => ({
                 name: building.building_name,
                 floors: (building.floors || []).map(floor => ({
@@ -107,7 +107,7 @@ const [floorPlanPreviews, setFloorPlanPreviews] = useState([]);
                     floorPlan: floor.floor_plan_image ? { name: floor.floor_plan_image } : null
                 }))
             })));
-            
+
             setAmenities(data.amenities || {});
         } catch (error) {
             console.error('Error fetching project data:', error);
@@ -116,7 +116,7 @@ const [floorPlanPreviews, setFloorPlanPreviews] = useState([]);
             setLoading(false);
         }
     };
-    
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -157,7 +157,7 @@ const [floorPlanPreviews, setFloorPlanPreviews] = useState([]);
             video_paths: videos.map(file => file.name),
             washroom: washroom
         };
-  
+
 
         try {
             const formData = new FormData();
@@ -235,13 +235,13 @@ const [floorPlanPreviews, setFloorPlanPreviews] = useState([]);
         setImages(files);
         setImagePreviews(files.map(file => URL.createObjectURL(file)));
     };
-    
+
     const handleVideoChange = (e) => {
         const files = Array.from(e.target.files);
         setVideos(files);
         setVideoPreviews(files.map(file => URL.createObjectURL(file)));
     };
-    
+
     const handleFloorPlanChange = (buildingIndex, floorIndex, file) => {
         setBuildings(prevBuildings => {
             const newBuildings = [...prevBuildings];
@@ -255,7 +255,7 @@ const [floorPlanPreviews, setFloorPlanPreviews] = useState([]);
             return newBuildings;
         });
     };
-    
+
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
     return (
@@ -267,48 +267,48 @@ const [floorPlanPreviews, setFloorPlanPreviews] = useState([]);
                     <label htmlFor="projectName">Project Name</label>
                     <input id="projectName" type="text" value={projectName} onChange={e => setProjectName(e.target.value)} />
                     <label htmlFor="description">Description</label>
-                    <textarea id="description" value={description} onChange={e => setDescription(e.target.value)}  rows="4" cols="50" />
+                    <textarea id="description" value={description} onChange={e => setDescription(e.target.value)} rows="4" cols="50" />
                     <label htmlFor="price">Price</label>
                     <input id="price" type="number" value={price} onChange={e => setPrice(e.target.value)} />
                     {/* <label htmlFor="images">Images</label>
                     <input id="images" type="file" multiple onChange={e => handleImageChange(e, setImages)} accept="image/*" /> */}
                     <label htmlFor="images">Images</label>
-<input id="images" type="file" multiple onChange={handleImageChange} accept="image/*" />
-<div>
-    {imagePreviews.map((preview, index) => (
-        <img key={index} src={preview} alt={`Image preview ${index + 1}`} className={styles.previewImage} />
-    ))}
-</div>
+                    <input id="images" type="file" multiple onChange={handleImageChange} accept="image/*" />
+                    <div>
+                        {imagePreviews.map((preview, index) => (
+                            <Image width={200} height={200} key={index} src={preview} alt={`Image preview ${index + 1}`} className={styles.previewImage} />
+                        ))}
+                    </div>
                     {/* <label htmlFor="videos">Videos</label>
                     <input id="videos" type="file" multiple onChange={e => handleVideoChange(e, setVideos)} accept="video/*" /> */}
                     <label htmlFor="videos">Videos</label>
-<input id="videos" type="file" multiple onChange={handleVideoChange} accept="video/*" />
-<div>
-    {videoPreviews.map((preview, index) => (
-        <video key={index} controls className={styles.previewVideo}>
-            <source src={preview} type="video/mp4" />
-            Your browser does not support the video tag.
-        </video>
-    ))}
-</div>
+                    <input id="videos" type="file" multiple onChange={handleVideoChange} accept="video/*" />
+                    <div>
+                        {videoPreviews.map((preview, index) => (
+                            <video key={index} controls className={styles.previewVideo}>
+                                <source src={preview} type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        ))}
+                    </div>
                     <label htmlFor="developerName">Developer Name</label>
-                    <input id="developerName" type="text" value={developerName} onChange={e => setDeveloperName(e.target.value)}  />
+                    <input id="developerName" type="text" value={developerName} onChange={e => setDeveloperName(e.target.value)} />
                     <label htmlFor="location">Location</label>
-                    <input id="location" type="text" value={location} onChange={e => setLocation(e.target.value)}  />
+                    <input id="location" type="text" value={location} onChange={e => setLocation(e.target.value)} />
                     <label htmlFor="deliveryDate">Delivery Date</label>
-                    <input id="deliveryDate" type="date" value={deliveryDate} onChange={e => setDeliveryDate(e.target.value)}  />
+                    <input id="deliveryDate" type="date" value={deliveryDate} onChange={e => setDeliveryDate(e.target.value)} />
                     <label htmlFor="announcementDate">Announcement Date</label>
-                    <input id="announcementDate" type="date" value={announcementDate} onChange={e => setAnnouncementDate(e.target.value)}  />
+                    <input id="announcementDate" type="date" value={announcementDate} onChange={e => setAnnouncementDate(e.target.value)} />
                     <label htmlFor="constructionStartDate">Construction Start Date</label>
-                    <input id="constructionStartDate" type="date" value={constructionStartDate} onChange={e => setConstructionStartDate(e.target.value)}  />
+                    <input id="constructionStartDate" type="date" value={constructionStartDate} onChange={e => setConstructionStartDate(e.target.value)} />
                     <label htmlFor="expectedCompletionDate">Expected Completion Date</label>
-                    <input id="expectedCompletionDate" type="date" value={expectedCompletionDate} onChange={e => setExpectedCompletionDate(e.target.value)}  />
+                    <input id="expectedCompletionDate" type="date" value={expectedCompletionDate} onChange={e => setExpectedCompletionDate(e.target.value)} />
                     <label htmlFor="city">City</label>
-                    <input id="city" type="text" value={city} onChange={e => setCity(e.target.value)}  />
+                    <input id="city" type="text" value={city} onChange={e => setCity(e.target.value)} />
                     <label htmlFor="locality">Locality</label>
-                    <input id="locality" type="text" value={locality} onChange={e => setLocality(e.target.value)}  />
+                    <input id="locality" type="text" value={locality} onChange={e => setLocality(e.target.value)} />
                     <label htmlFor="landZone">Land Zone</label>
-                    <input id="landZone" type="text" value={landZone} onChange={e => setLandZone(e.target.value)}  />
+                    <input id="landZone" type="text" value={landZone} onChange={e => setLandZone(e.target.value)} />
                     <label htmlFor="propertyType">Property Type</label>
                     <select id="propertyType" value={propertyType} onChange={e => setPropertyType(e.target.value)} >
                         <option value="">Select Property Type</option>
@@ -317,129 +317,67 @@ const [floorPlanPreviews, setFloorPlanPreviews] = useState([]);
                         <option value="Agricultural">Agricultural</option>
                     </select>
                     <label htmlFor="numberOfBuildings">Number of Buildings</label>
-                    <input id="numberOfBuildings" type="number" value={numberOfBuildings} onChange={e => setNumberOfBuildings(e.target.value)}  />
-                    
+                    <input id="numberOfBuildings" type="number" value={numberOfBuildings} onChange={e => setNumberOfBuildings(e.target.value)} />
                     <div>
-            {/* {buildings.map((building, buildingIndex) => (
-                <div key={buildingIndex} className={styles.building_box_css}>
-                    <label>Building {buildingIndex + 1}</label>
-                    <input
-                        type="text"
-                        value={building.name || ''}
-                        onChange={(e) => handleBuildingChange(buildingIndex, 'name', e.target.value)}
-                        placeholder={`Building ${buildingIndex + 1} Name`}
-                        
-                    />
-                    {building.floors && building.floors.length > 0 ? (
-                        building.floors.map((floor, floorIndex) => (
-                            <div key={floorIndex} className={styles.floor_box_css}>
-                                <label>Floor {floorIndex + 1}</label>
+
+                        {buildings.map((building, buildingIndex) => (
+                            <div key={buildingIndex} className={styles.building_box_css}>
+                                <label>Building {buildingIndex + 1}</label>
                                 <input
                                     type="text"
-                                    value={floor.floor_name  || ''}
-                                    onChange={(e) => handleFloorChange(buildingIndex, floorIndex, 'floor_name', e.target.value)}
-                                    placeholder="Floor Name"
-                                    
+                                    value={building.name || ''}
+                                    onChange={(e) => handleBuildingChange(buildingIndex, 'name', e.target.value)}
+                                    placeholder={`Building ${buildingIndex + 1} Name`}
                                 />
-                                <input
-                                    type="number"
-                                    value={floor.bedrooms || ''}
-                                    onChange={(e) => handleFloorChange(buildingIndex, floorIndex, 'bedrooms', e.target.value)}
-                                    placeholder="Number of Bedrooms"
-                                    
-                                />
-                                <input
-                                    type="text"
-                                    value={floor.area || ''}
-                                    onChange={(e) => handleFloorChange(buildingIndex, floorIndex, 'area', e.target.value)}
-                                    placeholder="Floor Area"
-                                    
-                                />
-                                <input
-                                    type="text"
-                                    value={floor.floor_price || ''}
-                                    onChange={(e) => handleFloorChange(buildingIndex, floorIndex, 'floor_price', e.target.value)}
-                                    placeholder="Floor Price"
-                                    
-                                />
-                                <input
-                                    type="file"
-                                    onChange={(e) => handleFloorChange(buildingIndex, floorIndex, 'floorPlan', e.target.files[0])}
-                                    accept="image/*"
-                                />
+                                {building.floors.map((floor, floorIndex) => (
+                                    <div key={floorIndex} className={styles.floor_box_css}>
+                                        <label>Floor {floorIndex + 1}</label>
+                                        <input
+                                            type="text"
+                                            value={floor.floor_name || ''}
+                                            onChange={(e) => handleFloorChange(buildingIndex, floorIndex, 'floor_name', e.target.value)}
+                                            placeholder="Floor Name"
+                                        />
+                                        <input
+                                            type="number"
+                                            value={floor.bedrooms || ''}
+                                            onChange={(e) => handleFloorChange(buildingIndex, floorIndex, 'bedrooms', e.target.value)}
+                                            placeholder="Number of Bedrooms"
+                                        />
+                                        <input
+                                            type="text"
+                                            value={floor.area || ''}
+                                            onChange={(e) => handleFloorChange(buildingIndex, floorIndex, 'area', e.target.value)}
+                                            placeholder="Floor Area"
+                                        />
+                                        <input
+                                            type="text"
+                                            value={floor.floor_price || ''}
+                                            onChange={(e) => handleFloorChange(buildingIndex, floorIndex, 'floor_price', e.target.value)}
+                                            placeholder="Floor Price"
+                                        />
+                                        <input
+                                            type="file"
+                                            onChange={(e) => handleFloorPlanChange(buildingIndex, floorIndex, e.target.files[0])}
+                                            accept="image/*"
+                                        />
+                                        {floorPlanPreviews[buildingIndex] && floorPlanPreviews[buildingIndex][floorIndex] && (
+                                            <Image width={200} height={200} src={floorPlanPreviews[buildingIndex][floorIndex]} alt={`Floor Plan ${buildingIndex + 1}-${floorIndex + 1}`} className={styles.previewImage} />
+                                        )}
+                                    </div>
+                                ))}
+                                <button
+                                    type="button"
+                                    onClick={() => handleAddFloor(buildingIndex)}
+                                    className={styles.add_floor_css}
+                                >
+                                    <i className='bx bxs-add-to-queue'></i> Add Floor
+                                </button>
                             </div>
-                        ))
-                    ) : (
-                        <p>No floors available for this building.</p>
-                    )}
-                    <button
-                        type="button"
-                        onClick={() => handleAddFloor(buildingIndex)}
-                        className={styles.add_floor_css}
-                    >
-                        <i className='bx bxs-add-to-queue'></i> Add Floor
-                    </button>
-                </div>
-            ))} */}
-            {buildings.map((building, buildingIndex) => (
-    <div key={buildingIndex} className={styles.building_box_css}>
-        <label>Building {buildingIndex + 1}</label>
-        <input
-            type="text"
-            value={building.name || ''}
-            onChange={(e) => handleBuildingChange(buildingIndex, 'name', e.target.value)}
-            placeholder={`Building ${buildingIndex + 1} Name`}
-        />
-        {building.floors.map((floor, floorIndex) => (
-            <div key={floorIndex} className={styles.floor_box_css}>
-                <label>Floor {floorIndex + 1}</label>
-                <input
-                    type="text"
-                    value={floor.floor_name || ''}
-                    onChange={(e) => handleFloorChange(buildingIndex, floorIndex, 'floor_name', e.target.value)}
-                    placeholder="Floor Name"
-                />
-                <input
-                    type="number"
-                    value={floor.bedrooms || ''}
-                    onChange={(e) => handleFloorChange(buildingIndex, floorIndex, 'bedrooms', e.target.value)}
-                    placeholder="Number of Bedrooms"
-                />
-                <input
-                    type="text"
-                    value={floor.area || ''}
-                    onChange={(e) => handleFloorChange(buildingIndex, floorIndex, 'area', e.target.value)}
-                    placeholder="Floor Area"
-                />
-                <input
-                    type="text"
-                    value={floor.floor_price || ''}
-                    onChange={(e) => handleFloorChange(buildingIndex, floorIndex, 'floor_price', e.target.value)}
-                    placeholder="Floor Price"
-                />
-                <input
-                    type="file"
-                    onChange={(e) => handleFloorPlanChange(buildingIndex, floorIndex, e.target.files[0])}
-                    accept="image/*"
-                />
-                {floorPlanPreviews[buildingIndex] && floorPlanPreviews[buildingIndex][floorIndex] && (
-                    <img src={floorPlanPreviews[buildingIndex][floorIndex]} alt={`Floor Plan ${buildingIndex + 1}-${floorIndex + 1}`} className={styles.previewImage} />
-                )}
-            </div>
-        ))}
-        <button
-            type="button"
-            onClick={() => handleAddFloor(buildingIndex)}
-            className={styles.add_floor_css}
-        >
-            <i className='bx bxs-add-to-queue'></i> Add Floor
-        </button>
-    </div>
-))}
-        </div>
-  
-                    
-                    <button type="submit" className={styles.submitButton}>Update Project</button>
+                        ))}
+                    </div>
+
+                    <button type="submit" className={styles.submit_btn_css}>Update Project</button>
                 </form>
             </section>
         </>

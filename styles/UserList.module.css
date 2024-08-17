@@ -10,7 +10,7 @@
 }
 
 .dashboard_main_box h2 {
-  font-size: 30px;
+  font-size: 25px;
   line-height: 1;
 }
 
@@ -73,6 +73,7 @@
   border: 1px solid #ddd;
   padding: 8px;
   white-space:nowrap;
+  font-size: 14px;
 }
 
 .customers tr:nth-child(even) {
@@ -105,6 +106,26 @@
   border-radius: 5px;
 }
 
+.change_password_btn{
+  background-color: rgb(0, 0, 0);
+  color: white;
+  padding: 2px 10px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.button_box{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .padding_0 {
   padding: 0px !important;
 }
@@ -121,6 +142,14 @@
   font-size: 14px;
   cursor: pointer;
   border-radius: 5px;
+}
+
+.action_box{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
 }
 
 .approve_btn {
@@ -186,8 +215,11 @@
   gap: 5px;
 }
 
-
-
+.agent_profile_img{
+  width: auto;
+  height: 40px;
+  border-radius: 5px;
+}
 
 /* Responsive Code */
 
@@ -203,6 +235,10 @@
   .dashboard_main_box h2 {
     font-size: 25px;
     text-align: center;
+  }
+  .customer_filter_big_box{
+    flex-direction: column;
+    gap: 5px;
   }
 
   .customer_filter_big_box button {
