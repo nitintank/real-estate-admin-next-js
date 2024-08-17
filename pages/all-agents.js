@@ -51,10 +51,10 @@ const AllAgents = () => {
 
 
     const filteredAgent = agents.filter(agent =>
-        agent.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
-        agent.email.toLowerCase().includes(searchQuery.toLowerCase()) &&
-        agent.phone_number.toLowerCase().includes(searchQuery.toLowerCase()) &&
-        agent.office_phone_number.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        agent.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        agent.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        agent.phone_number.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        agent.office_phone_number.toLowerCase().includes(searchQuery.toLowerCase()) ||
         agent.address.toLowerCase().includes(searchQuery.toLowerCase())
     );
     

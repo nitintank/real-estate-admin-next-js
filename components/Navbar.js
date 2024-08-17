@@ -200,6 +200,23 @@ const Navbar = () => {
                                 <span className={styles.navlink}>Wallet Coins</span>
                             </Link>
                         </li>
+                        <li className={styles.item}>
+                            <Link href="/purchased-subscription-plan" className={styles.nav_link}>
+                                <span className={styles.navlink_icon}>
+                                    <i className='bx bx-list-ol'></i>
+                                </span>
+                                <span className={styles.navlink}>Purchased Subscription Plan</span>
+                            </Link>
+                        </li>
+                        
+                        <li className={styles.item}>
+                            <Link href="/all-transtion-history" className={styles.nav_link}>
+                                <span className={styles.navlink_icon}>
+                                    <i className='bx bx-list-ol'></i>
+                                </span>
+                                <span className={styles.navlink}>All Transtion History</span>
+                            </Link>
+                        </li>
                     </ul>
                 </div>
             </nav>

@@ -116,9 +116,21 @@ const Agenttransactions = () => {
                                             />
                                         </td>
                                         <td>{transaction.property_detail}</td>
-                                        <td><a href={transaction['10nc_document_contract']} target="_blank" rel="noopener noreferrer">View Document</a></td>
-                                        <td><a href={transaction.owners_document} target="_blank" rel="noopener noreferrer">View Document</a></td>
-                                        <td><a href={transaction.payment_cheques} target="_blank" rel="noopener noreferrer">View Cheques</a></td>
+                                        <td>
+                                            <a href={`https://a.khelogame.xyz/${transaction.tnc_document_contract}`} target="_blank" rel="noopener noreferrer">
+                                                View Document
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href={`https://a.khelogame.xyz/${transaction.owners_document}`} target="_blank" rel="noopener noreferrer">
+                                                View Document
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href={`https://a.khelogame.xyz/${transaction.payment_cheques}`} target="_blank" rel="noopener noreferrer">
+                                                View Cheque
+                                            </a>
+                                        </td>
                                         <td>{new Date(transaction.created_at).toLocaleString()}</td>
                                         <td>{transaction.status}</td>
                                         <td>

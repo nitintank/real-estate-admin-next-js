@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from "@/styles/PropertyPageEnquiry.module.css";
 import Navbar from "@/components/Navbar";
+import Link from 'next/link';
 
 const PropertyPageEnquiry = () => {
     const [inquiries, setInquiries] = useState([]);
@@ -54,7 +55,11 @@ const PropertyPageEnquiry = () => {
                                 <tr key={inquiry.id}>
                                     <td>{index + 1}</td>
                                     <td>{inquiry.user_name}</td>
+                                    <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${inquiry.property_id}`}>
+                                    
                                     <td>{inquiry.property_name}</td>
+                                    </Link>
+                                   
                                     <td>{inquiry.name}</td>
                                     <td>{inquiry.email}</td>
                                     <td>{inquiry.phone_number}</td>
