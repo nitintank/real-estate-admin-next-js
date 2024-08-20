@@ -25,7 +25,7 @@ const AddProject = () => {
     const [propertyType, setPropertyType] = useState('');
     const [numberOfBuildings, setNumberOfBuildings] = useState(1);
     const [buildings, setBuildings] = useState([
-        { name: '', floors: [{ name: '', bedrooms: '', area: '',floor_price: '', floorPlan: null }] }
+        { name: '', floors: [{ name: '', bedrooms: '', area: '', floor_price: '', floorPlan: null }] }
     ]);
     const [amenities, setAmenities] = useState({
         recreationAndFamily: [],
@@ -77,7 +77,7 @@ const AddProject = () => {
                         floor_name: floor.name,
                         floor_area: floor.area,
                         floor_bedrooms: floor.bedrooms,
-                        floor_price : floor.floor_price,
+                        floor_price: floor.floor_price,
                         floor_plan_image: floor.floorPlan ? floor.floorPlan.name : null
                     };
                 });
@@ -128,7 +128,7 @@ const AddProject = () => {
                 const result = await response.json();
                 console.log('Project added successfully:', result);
                 toast.success('Project added successfully!');
-               
+
             } else {
                 const error = await response.json();
                 toast.error(`Error: ${errorData.message}`);
@@ -143,12 +143,12 @@ const AddProject = () => {
 
     // Handlers for dynamically adding buildings and floors
     const handleAddBuilding = () => {
-        setBuildings([...buildings, { name: '', floors: [{ name: '', bedrooms: '', area: '',floor_price:'', floorPlan: null }] }]);
+        setBuildings([...buildings, { name: '', floors: [{ name: '', bedrooms: '', area: '', floor_price: '', floorPlan: null }] }]);
     };
 
     const handleAddFloor = (buildingIndex) => {
         const updatedBuildings = [...buildings];
-        updatedBuildings[buildingIndex].floors.push({ name: '', bedrooms: '', area: '',floor_price:'', floorPlan: null });
+        updatedBuildings[buildingIndex].floors.push({ name: '', bedrooms: '', area: '', floor_price: '', floorPlan: null });
         setBuildings(updatedBuildings);
     };
 
@@ -176,6 +176,11 @@ const AddProject = () => {
         setBuildings(updatedBuildings);
     };
 
+    const handleImageChange = (e) => {
+        const files = Array.from(e.target.files);
+        setImages((prevImagePaths) => [...prevImagePaths, ...files]);
+    };
+
     return (
         <>
             <Navbar />
@@ -193,8 +198,21 @@ const AddProject = () => {
                     <label htmlFor="price">Price</label>
                     <input id="price" type="number" value={price} onChange={e => setPrice(e.target.value)} required />
                     {errors.price && <p className={styles.errorText}>{errors.price}</p>}
+
                     <label htmlFor="images">Images</label>
-                    <input id="images" type="file" multiple onChange={e => handleFileChange(e, setImages)} accept="image/*" />
+                    {/* <input id="images" type="file" multiple onChange={e => handleFileChange(e, setImages)} accept="image/*" /> */}
+                    <input id="images" type="file" multiple onChange={handleImageChange} />
+                    <div>
+                        {images.map((file, index) => (
+                            <img
+                                key={index}
+                                src={URL.createObjectURL(file)}
+                                alt={`Floor Map Image ${index + 1}`}
+                                style={{ width: '100px', height: '100px', objectFit: 'cover', margin: '0px 10px', borderRadius: '10px' }}
+                            />
+                        ))}
+                    </div>
+
                     <label htmlFor="videos">Videos</label>
                     <input id="videos" type="file" multiple onChange={e => handleFileChange(e, setVideos)} accept="video/*" />
                     <label htmlFor="developerName">Developer Name</label>
@@ -247,7 +265,7 @@ const AddProject = () => {
                         onChange={(e) => {
                             const num = Number(e.target.value);
                             setNumberOfBuildings(num);
-                            setBuildings(Array(num).fill().map(() => ({ name: '', floors: [{ name: '', bedrooms: '', area: '',floor_price:'', floorPlan: null }] })));
+                            setBuildings(Array(num).fill().map(() => ({ name: '', floors: [{ name: '', bedrooms: '', area: '', floor_price: '', floorPlan: null }] })));
                         }}
                         min="1"
                         required
@@ -287,7 +305,7 @@ const AddProject = () => {
                                         placeholder="Floor Area"
                                         required
                                     />
-                                     <input
+                                    <input
                                         type="text"
                                         value={floor.floor_price}
                                         onChange={(e) => handleFloorChange(buildingIndex, floorIndex, 'floor_price', e.target.value)}
