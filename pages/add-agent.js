@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from "@/styles/AddAgent.module.css";
 import Navbar from "@/components/Navbar";
 import Image from 'next/image';
@@ -15,10 +15,10 @@ const AddAgent = () => {
         address: '',
         description: '',
         experience: '',
-        twitter:'',
-        facebook:'',
-        instagram:'',
-        youtube:'',
+        twitter: '',
+        facebook: '',
+        instagram: '',
+        youtube: '',
         image: null
     });
     const [imagePreview, setImagePreview] = useState(null);
@@ -37,23 +37,45 @@ const AddAgent = () => {
 
     const validateForm = () => {
         const newErrors = {};
-    
+
         // Access values from formData
         const { name, email, phoneNumber, password, officePhoneNumber } = formData;
-    
+
         if (!name) newErrors.name = 'Name is required';
         if (!email) newErrors.email = 'Email is required';
         if (!phoneNumber) newErrors.phoneNumber = 'Phone Number is required';
         if (!password) newErrors.password = 'Password is required';
         if (!officePhoneNumber) newErrors.officePhoneNumber = 'Office phone number is required';
-    
+
         setErrors(newErrors);
-    
+
         return Object.keys(newErrors).length === 0;
     };
-    
 
+    // Utility function to check if the token has expired
+    const isTokenExpired = (token) => {
+        if (!token) return true;
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
 
+        const { exp } = JSON.parse(jsonPayload);
+        const currentTime = Math.floor(Date.now() / 1000);
+
+        return exp < currentTime;
+    };
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem('accessToken');
+        const username = localStorage.getItem('username');
+
+        // If token is not found or token is expired, redirect to login
+        if (!accessToken || !username || isTokenExpired(accessToken)) {
+            location.href = "/login";
+        }
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -90,10 +112,10 @@ const AddAgent = () => {
             } else {
                 const errorData = await response.json();
                 toast.error(`Error: ${errorData.message}`);
-                console.error('Error:',  errorData);
+                console.error('Error:', errorData);
             }
         } catch (error) {
-            
+
             console.error('Error:', error);
             alert('An error occurred. Please try again later.');
         }
@@ -108,16 +130,16 @@ const AddAgent = () => {
                 <h2>Add New Agent</h2>
                 <form onSubmit={handleSubmit} className={styles.agent_form_big_box}>
                     <input type="text" placeholder="Add Agent Name" name="name" value={formData.name} onChange={handleChange} />
-                    {errors.name && <p className={styles.errorText}>{errors.name}</p>}    
+                    {errors.name && <p className={styles.errorText}>{errors.name}</p>}
                     <input type="text" placeholder="Add Email Id" name="email" value={formData.email} onChange={handleChange} />
-                    {errors.email && <p className={styles.errorText}>{errors.email}</p>}    
-                    <input type="text" placeholder="Add Phone Number" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange}/>
+                    {errors.email && <p className={styles.errorText}>{errors.email}</p>}
+                    <input type="text" placeholder="Add Phone Number" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
                     {errors.phoneNumber && <p className={styles.errorText}>{errors.phoneNumber}</p>}
-                    
-                    <input type="text" placeholder="Add Password" name="password" value={formData.password} onChange={handleChange}/>
-                    {errors.password && <p className={styles.errorText}>{errors.password}</p>}    
+
+                    <input type="text" placeholder="Add Password" name="password" value={formData.password} onChange={handleChange} />
+                    {errors.password && <p className={styles.errorText}>{errors.password}</p>}
                     <input type="text" placeholder="Add Office Phone Number" name="officePhoneNumber" value={formData.officePhoneNumber} onChange={handleChange} />
-                    {errors.officePhoneNumber && <p className={styles.errorText}>{errors.officePhoneNumber}</p>}    
+                    {errors.officePhoneNumber && <p className={styles.errorText}>{errors.officePhoneNumber}</p>}
                     <textarea id="" placeholder="Add Address" name="address" value={formData.address} onChange={handleChange}></textarea>
                     <textarea id="" placeholder="Add Description" name="description" value={formData.description} onChange={handleChange}></textarea>
                     <input type="text" placeholder="Add Experience" name="experience" value={formData.experience} onChange={handleChange} />

@@ -12,6 +12,31 @@ const Purchasesubscriptionplan = () => {
     const [newExpiryDate, setNewExpiryDate] = useState('');
     const [newPlanId, setNewPlanId] = useState('');
 
+    // Utility function to check if the token has expired
+    const isTokenExpired = (token) => {
+        if (!token) return true;
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        const { exp } = JSON.parse(jsonPayload);
+        const currentTime = Math.floor(Date.now() / 1000);
+
+        return exp < currentTime;
+    };
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem('accessToken');
+        const username = localStorage.getItem('username');
+
+        // If token is not found or token is expired, redirect to login
+        if (!accessToken || !username || isTokenExpired(accessToken)) {
+            location.href = "/login";
+        }
+    }, []);
+
     useEffect(() => {
         const fetchSubscriptions = async () => {
             try {
@@ -83,10 +108,10 @@ const Purchasesubscriptionplan = () => {
             }
 
             // Update local state
-            setSubscriptions(prevSubscriptions => prevSubscriptions.map(sub => 
-                sub.subscription_id === editingSubscription.subscription_id 
-                ? { ...sub, expiry_date: newExpiryDate, subscription_id: newPlanId } 
-                : sub
+            setSubscriptions(prevSubscriptions => prevSubscriptions.map(sub =>
+                sub.subscription_id === editingSubscription.subscription_id
+                    ? { ...sub, expiry_date: newExpiryDate, subscription_id: newPlanId }
+                    : sub
             ));
             setEditingSubscription(null);
             setNewExpiryDate('');
@@ -138,16 +163,16 @@ const Purchasesubscriptionplan = () => {
                                                 <div>
                                                     <label>
                                                         Expiry Date:
-                                                        <input 
-                                                            type="date" 
-                                                            value={newExpiryDate} 
-                                                            onChange={(e) => setNewExpiryDate(e.target.value)} 
+                                                        <input
+                                                            type="date"
+                                                            value={newExpiryDate}
+                                                            onChange={(e) => setNewExpiryDate(e.target.value)}
                                                         />
                                                     </label>
                                                     <label>
                                                         Plan:
-                                                        <select 
-                                                            value={newPlanId} 
+                                                        <select
+                                                            value={newPlanId}
                                                             onChange={(e) => setNewPlanId(e.target.value)}
                                                         >
                                                             <option value="">Select Plan</option>
@@ -168,7 +193,7 @@ const Purchasesubscriptionplan = () => {
                         </table>
                     </div>
                 )}
-             
+
             </section>
         </>
     );

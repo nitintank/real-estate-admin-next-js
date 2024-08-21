@@ -14,6 +14,31 @@ const AllAgents = () => {
     const [selectedAgent, setSelectedAgent] = useState(null);
     const router = useRouter();
 
+    // Utility function to check if the token has expired
+    const isTokenExpired = (token) => {
+        if (!token) return true;
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        const { exp } = JSON.parse(jsonPayload);
+        const currentTime = Math.floor(Date.now() / 1000);
+
+        return exp < currentTime;
+    };
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem('accessToken');
+        const username = localStorage.getItem('username');
+
+        // If token is not found or token is expired, redirect to login
+        if (!accessToken || !username || isTokenExpired(accessToken)) {
+            location.href = "/login";
+        }
+    }, []);
+
     useEffect(() => {
         const fetchAgents = async () => {
             try {
@@ -56,7 +81,7 @@ const AllAgents = () => {
         agent.office_phone_number.toLowerCase().includes(searchQuery.toLowerCase()) ||
         agent.address.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    
+
     const handleDeleteClick = async (agentId) => {
         if (confirm('Are you sure you want to delete this agent?')) {
             try {
@@ -67,18 +92,18 @@ const AllAgents = () => {
                         'Content-Type': 'application/json'
                     }
                 });
-    
+
                 if (!response.ok) {
                     throw new Error('Failed to delete agent');
                 }
-    
+
                 setAgents(agents.filter(agent => agent.id !== agentId));
             } catch (err) {
                 setError(err.message);
             }
         }
     };
-    
+
 
     return (
         <>
@@ -88,7 +113,7 @@ const AllAgents = () => {
                 <h2>All Agents List</h2>
                 <div className={styles.customer_filter_big_box}>
                     <div className={styles.search_customer_box}>
-                        <input type="text" placeholder="Search Agent By Name"  value={searchQuery}
+                        <input type="text" placeholder="Search Agent By Name" value={searchQuery}
                             onChange={handleSearchChange} />
                         <i className='bx bx-search-alt'></i>
                     </div>
@@ -153,7 +178,7 @@ const AllAgents = () => {
                 <ChangePasswordModal
                     user={selectedAgent}
                     onClose={closePasswordChangeModal}
-                    userType="agent" 
+                    userType="agent"
                 />
             )}
         </>

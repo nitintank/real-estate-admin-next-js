@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from "@/styles/ManageWebsiteNumber.module.css"; 
+import styles from "@/styles/ManageWebsiteNumber.module.css";
 import Navbar from "@/components/Navbar";
 import { useRouter } from 'next/router';
 
@@ -12,6 +12,31 @@ const EditSubscription = () => {
         description: ''
     });
     const [error, setError] = useState(null);
+
+    // Utility function to check if the token has expired
+    const isTokenExpired = (token) => {
+        if (!token) return true;
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        const { exp } = JSON.parse(jsonPayload);
+        const currentTime = Math.floor(Date.now() / 1000);
+
+        return exp < currentTime;
+    };
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem('accessToken');
+        const username = localStorage.getItem('username');
+
+        // If token is not found or token is expired, redirect to login
+        if (!accessToken || !username || isTokenExpired(accessToken)) {
+            location.href = "/login";
+        }
+    }, []);
 
     useEffect(() => {
         if (id) {
@@ -71,23 +96,23 @@ const EditSubscription = () => {
                 <h2>Edit Subscription</h2>
                 {error && <p className={styles.error}>{error}</p>}
                 <form onSubmit={handleSubmit} className={styles.website_form_big_box}>
-                    <input 
-                        type="text" 
-                        placeholder="Plan Name" 
+                    <input
+                        type="text"
+                        placeholder="Plan Name"
                         value={subscription.plan_name}
-                        onChange={(e) => setSubscription(prev => ({ ...prev, plan_name: e.target.value }))} 
+                        onChange={(e) => setSubscription(prev => ({ ...prev, plan_name: e.target.value }))}
                     />
-                    <input 
-                        type="number" 
-                        placeholder="Price" 
+                    <input
+                        type="number"
+                        placeholder="Price"
                         value={subscription.price}
-                        onChange={(e) => setSubscription(prev => ({ ...prev, price: e.target.value }))} 
+                        onChange={(e) => setSubscription(prev => ({ ...prev, price: e.target.value }))}
                     />
-                    <input 
-                        type="text" 
-                        placeholder="Description" 
+                    <input
+                        type="text"
+                        placeholder="Description"
                         value={subscription.description}
-                        onChange={(e) => setSubscription(prev => ({ ...prev, description: e.target.value }))} 
+                        onChange={(e) => setSubscription(prev => ({ ...prev, description: e.target.value }))}
                     />
                     <input type="submit" value="Update Subscription" />
                 </form>

@@ -3,10 +3,34 @@ import styles from "@/styles/AllReviews.module.css";
 import Navbar from "@/components/Navbar";
 import Link from 'next/link';
 
-
 const AllReviews = () => {
     const [reviews, setReviews] = useState([]);
     const [filter, setFilter] = useState('all');
+
+    // Utility function to check if the token has expired
+    const isTokenExpired = (token) => {
+        if (!token) return true;
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        const { exp } = JSON.parse(jsonPayload);
+        const currentTime = Math.floor(Date.now() / 1000);
+
+        return exp < currentTime;
+    };
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem('accessToken');
+        const username = localStorage.getItem('username');
+
+        // If token is not found or token is expired, redirect to login
+        if (!accessToken || !username || isTokenExpired(accessToken)) {
+            location.href = "/login";
+        }
+    }, []);
 
     useEffect(() => {
         const fetchReviews = async () => {
@@ -41,7 +65,7 @@ const AllReviews = () => {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ status }) 
+                body: JSON.stringify({ status })
             });
 
             if (!response.ok) {
@@ -65,8 +89,6 @@ const AllReviews = () => {
         return review.status === filter;
     });
 
-    
-
     return (
         <>
             <Navbar />
@@ -74,40 +96,40 @@ const AllReviews = () => {
                 <h2>All Reviews</h2>
                 <div className={styles.customer_filter_big_box}>
                     <div className={`${styles.switch_toggle} ${styles.switch_3} ${styles.switch_candy}`}>
-                        <input 
-                            id="all" 
-                            name="state-d" 
-                            type="radio" 
-                            value="all" 
-                            checked={filter === 'all'} 
-                            onChange={handleFilterChange} 
+                        <input
+                            id="all"
+                            name="state-d"
+                            type="radio"
+                            value="all"
+                            checked={filter === 'all'}
+                            onChange={handleFilterChange}
                         />
                         <label htmlFor="all">All Reviews</label>
-                        <input 
-                            id="approved" 
-                            name="state-d" 
-                            type="radio" 
-                            value="approved" 
-                            checked={filter === 'approved'} 
-                            onChange={handleFilterChange} 
+                        <input
+                            id="approved"
+                            name="state-d"
+                            type="radio"
+                            value="approved"
+                            checked={filter === 'approved'}
+                            onChange={handleFilterChange}
                         />
                         <label htmlFor="approved">Approved</label>
-                        <input 
-                            id="rejected" 
-                            name="state-d" 
-                            type="radio" 
-                            value="rejected" 
-                            checked={filter === 'rejected'} 
-                            onChange={handleFilterChange} 
+                        <input
+                            id="rejected"
+                            name="state-d"
+                            type="radio"
+                            value="rejected"
+                            checked={filter === 'rejected'}
+                            onChange={handleFilterChange}
                         />
                         <label htmlFor="rejected">Rejected</label>
-                        <input 
-                            id="pending" 
-                            name="state-d" 
-                            type="radio" 
-                            value="pending" 
-                            checked={filter === 'pending'} 
-                            onChange={handleFilterChange} 
+                        <input
+                            id="pending"
+                            name="state-d"
+                            type="radio"
+                            value="pending"
+                            checked={filter === 'pending'}
+                            onChange={handleFilterChange}
                         />
                         <label htmlFor="pending">Pending</label>
                     </div>

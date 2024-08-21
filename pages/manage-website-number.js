@@ -9,7 +9,7 @@ const ManageWebsiteNumber = () => {
     const [supportcontact, setSupportcontact] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    
+
     const router = useRouter();
 
     const [formData, setFormData] = useState({
@@ -17,6 +17,31 @@ const ManageWebsiteNumber = () => {
         support_contact_number: '',
         emergency_contact_number: ''
     });
+
+    // Utility function to check if the token has expired
+    const isTokenExpired = (token) => {
+        if (!token) return true;
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        const { exp } = JSON.parse(jsonPayload);
+        const currentTime = Math.floor(Date.now() / 1000);
+
+        return exp < currentTime;
+    };
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem('accessToken');
+        const username = localStorage.getItem('username');
+
+        // If token is not found or token is expired, redirect to login
+        if (!accessToken || !username || isTokenExpired(accessToken)) {
+            location.href = "/login";
+        }
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -29,21 +54,21 @@ const ManageWebsiteNumber = () => {
     // const validateForm = () => {
     //     const newErrors = {};
     //     const { help_contact_number, support_contact_number, emergency_contact_number } = formData;
-    
+
     //     if (!help_contact_number) newErrors.help_contact_number = 'Help Contact Number is required';
     //     if (!support_contact_number) newErrors.support_contact_number = 'Support Contact Number is required';
     //     if (!emergency_contact_number) newErrors.emergency_contact_number = 'Emergency Contact Number is required';
-    
+
     //     setError(newErrors);
-    
+
     //     return Object.keys(newErrors).length === 0;
     // };
-    
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // if (!validateForm()) return;
-        
+
         try {
             const response = await fetch('https://a.khelogame.xyz/admin_support_contact', {
                 method: 'POST',
@@ -125,7 +150,7 @@ const ManageWebsiteNumber = () => {
                 <h2>Manage Website Number</h2>
                 <form onSubmit={handleSubmit} className={styles.website_form_big_box}>
                     <input type="text" placeholder="Help Contact Number" name="help_contact_number" value={formData.help_contact_number}
-                            onChange={handleChange} />
+                        onChange={handleChange} />
                     {/* {error.help_contact_number && <p className={styles.errorText}>{error.help_contact_number}</p>}            */}
                     <input type="text" placeholder="Support Contact Number" name="support_contact_number" value={formData.support_contact_number} onChange={handleChange} />
                     {/* {error.support_contact_number && <p className={styles.errorText}>{error.support_contact_number}</p>}     */}
@@ -134,34 +159,34 @@ const ManageWebsiteNumber = () => {
                     <input type="submit" value="Save" />
                 </form>
                 <div className={styles.tableBigBox}>
-                {loading ? (
-                            <p>Loading agents...</p>
-                        ) : error ? (
-                            <p>{error}</p>
-                        ) : (
-                    <table className={styles.customers}>
-                        <thead>
-                            <tr>
-                                <th>Help Contact Number</th>
-                                <th>Support Contact Number</th>
-                                <th>Emergency Contact Number</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {supportcontact.map((support) => (
-                            <tr key={support.id}>
-                                <td>{support.help_contact_number}</td>
-                                <td>{support.support_contact_number}</td>
-                                <td>{support.emergency_contact_number}</td>
-                                <td>
-                                    <i className='bx bxs-edit' onClick={() => handleEditClick(support.id)}></i>
-                                    <i className='bx bx-trash' onClick={() => handleDeleteClick(support.id)}></i>
-                                </td>
-                            </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    {loading ? (
+                        <p>Loading agents...</p>
+                    ) : error ? (
+                        <p>{error}</p>
+                    ) : (
+                        <table className={styles.customers}>
+                            <thead>
+                                <tr>
+                                    <th>Help Contact Number</th>
+                                    <th>Support Contact Number</th>
+                                    <th>Emergency Contact Number</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {supportcontact.map((support) => (
+                                    <tr key={support.id}>
+                                        <td>{support.help_contact_number}</td>
+                                        <td>{support.support_contact_number}</td>
+                                        <td>{support.emergency_contact_number}</td>
+                                        <td>
+                                            <i className='bx bxs-edit' onClick={() => handleEditClick(support.id)}></i>
+                                            <i className='bx bx-trash' onClick={() => handleDeleteClick(support.id)}></i>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     )}
                 </div>
             </section>
