@@ -72,7 +72,7 @@ const AddWalletCoin = () => {
 
         if (!selectedAgentObj || !selectedPropertyObj) {
             setLoading(false);
-            alert('Selected agent or property not found');
+            alert('Selected Agent or Property Not Found');
             return;
         }
 
@@ -211,8 +211,10 @@ const AddWalletCoin = () => {
                                         <td>{request.requested_coins}</td>
                                         <td>{request.status}</td>
                                         <td>
-                                            <button onClick={() => handleRequest(request.id, 'approved')}>Approve</button>
-                                            <button onClick={() => handleRequest(request.id, 'rejected')}>Reject</button>
+                                            <div className={styles.action_box}>
+                                                <button onClick={() => handleRequest(request.id, 'approved')} className={styles.approve_btn}>Approve</button>
+                                                <button onClick={() => handleRequest(request.id, 'rejected')} className={styles.reject_btn}>Reject</button>
+                                            </div>
                                         </td>
                                     </tr>
                                 ))}
