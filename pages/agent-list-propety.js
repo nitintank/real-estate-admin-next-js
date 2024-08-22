@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import ChangePasswordModal from '@/components/ChangePasswordModal'; // Import the new modal component
+import Link from 'next/link';
 
 const AgentList = () => {
     const [agents, setAgents] = useState({});
@@ -207,7 +208,10 @@ const AgentList = () => {
                                                         {agent.properties.map((property, propIndex) => (
                                                             <tr key={property.property_id}>
                                                                 <td>{propIndex + 1}</td>
+                                                                <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${property.property_id}`}>
                                                                 <td>{property.property_name}</td>
+                                            </Link>
+                                                               
                                                                 <td>{property.property_type}</td>
                                                                 <td>{property.property_subtype}</td>
                                                                 <td>{property.status}</td>

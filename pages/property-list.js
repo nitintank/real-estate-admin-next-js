@@ -3,6 +3,7 @@ import styles from "@/styles/PropertyList.module.css";
 import Navbar from "@/components/Navbar";
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const PropertyList = () => {
   const [properties, setProperties] = useState([]);
@@ -216,6 +217,9 @@ const PropertyList = () => {
                   <td>{index + 1}</td>
                   <td>{property.property_name}</td>
                   <td>
+                  <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${property.property_id}`}>
+                                             
+                                          
                     <Image
                       width={200}
                       height={200}
@@ -223,6 +227,7 @@ const PropertyList = () => {
                       alt={property.property_name}
                       className={styles.property_image_css}
                     />
+                      </Link>
                   </td>
                   <td>{property.property_type}</td>
                   <td>{property.price}</td>

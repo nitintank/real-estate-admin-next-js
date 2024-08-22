@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styles from "@/styles/ManageWebsiteNumber.module.css";
 import Navbar from "@/components/Navbar";
+import Link from 'next/link';
+
 
 const TranstionHistory = () => {
     const [loading, setLoading] = useState(true);
@@ -92,7 +94,10 @@ const TranstionHistory = () => {
                                         <tr key={index}>
                                             <td>{transaction.user_name}</td>
                                             <td>{transaction.total_subscription_coins}</td>
+                                          
+                                            <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${transaction.property_id}`}>
                                             <td>{transaction.property_name}</td>
+                                            </Link>
                                             <td>{transaction.plan_name}</td>
                                             <td>{transaction.subscription_coins}</td>
                                             <td>{transaction.plan_price}</td>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from "@/styles/ManageWebsiteNumber.module.css";
 import Navbar from "@/components/Navbar";
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Purchasesubscriptionplan = () => {
     const [subscriptions, setSubscriptions] = useState([]);
@@ -155,7 +156,9 @@ const Purchasesubscriptionplan = () => {
                                 {subscriptions.map((subscription) => (
                                     <tr key={subscription.subscription_id}>
                                         <td>{subscription.user_name}</td>
+                                        <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${subscription.property_id}`}>   
                                         <td>{subscription.property_name || 'N/A'}</td>
+                                        </Link>
                                         <td>{subscription.plan_name}</td>
                                         <td>{subscription.plan_price}</td>
                                         <td>{subscription.subscription_coins}</td>

@@ -88,8 +88,9 @@ const AgentPageEnquiry = () => {
                                 {inquiries.map((inquiry, index) => (
                                     <tr key={inquiry.id}>
                                         <td>{index + 1}</td>
-                                        <td><Link href={`https://real-estate-gray-zeta.vercel.app/agent-detail?id=${inquiry.agent_id}`}>{inquiry.agent_name}</Link></td>
+                                        <td>{inquiry.agent_name}</td>
                                         <td>
+                                        <Link href={`https://real-estate-gray-zeta.vercel.app/agent-detail?id=${inquiry.agent_id}`}>
                                             {inquiry.agent_image_path && (
                                                 <Image
                                                     width={100}
@@ -99,6 +100,7 @@ const AgentPageEnquiry = () => {
                                                     className={styles.agent_profile_img}
                                                 />
                                             )}
+                                            </Link>
                                         </td>
                                         <td>{inquiry.name}</td>
                                         <td>{inquiry.email}</td>

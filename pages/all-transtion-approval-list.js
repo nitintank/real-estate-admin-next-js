@@ -141,7 +141,10 @@ const Agenttransactions = () => {
                                                 className={styles.agent_profile_img}
                                             />
                                         </td>
+                                        <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${transaction.property_id}`}>
                                         <td>{transaction.property_detail}</td>
+                                            </Link>
+                                      
                                         <td>
                                             <Link className={styles.docunment_box} href={`https://a.khelogame.xyz/${transaction.tnc_document_contract}`} target="_blank" rel="noopener noreferrer">
                                                 View Document

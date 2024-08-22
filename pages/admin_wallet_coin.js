@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import styles from "@/styles/WalletCoin.module.css";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Link from 'next/link';
 
 const AddWalletCoin = () => {
     const [agents, setAgents] = useState([]);
@@ -138,7 +139,7 @@ const AddWalletCoin = () => {
             .then(data => {
                 setLoading(false);
                 // alert(`Request ${status} successfully`);
-                toast.success('Request ${status} successfully!');
+                toast.success(`Request ${status} successfully!`);
                 fetchPendingRequests();
             })
             .catch(error => {
@@ -148,6 +149,12 @@ const AddWalletCoin = () => {
                 toast.error(`Error ${status === 'approved' ? 'approving' : 'rejecting'} request`);
             });
     };
+
+    // Create a lookup object for agents
+    const agentLookup = agents.reduce((lookup, agent) => {
+        lookup[agent.id] = agent.name;
+        return lookup;
+    }, {});
 
     return (
         <>
@@ -184,7 +191,7 @@ const AddWalletCoin = () => {
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Agent ID</th>
+                                    <th>Agent Name</th>
                                     <th>Property Name</th>
                                     <th>Requested Coins</th>
                                     <th>Status</th>
@@ -195,8 +202,12 @@ const AddWalletCoin = () => {
                                 {requests.map(request => (
                                     <tr key={request.id}>
                                         <td>{request.id}</td>
-                                        <td>{request.agent_id}</td>
-                                        <td>{request.property_name}</td>
+                                        <td>{agentLookup[request.agent_id]}</td>
+                                        <td>
+                                            <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${request.property_id}`}>
+                                                {request.property_name}
+                                            </Link>
+                                        </td>
                                         <td>{request.requested_coins}</td>
                                         <td>{request.status}</td>
                                         <td>

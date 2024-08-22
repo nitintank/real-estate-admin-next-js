@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import styles from "@/styles/ProjectList.module.css";
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const ProjectList = () => {
     const [projects, setProjects] = useState([]);
@@ -94,22 +95,21 @@ const ProjectList = () => {
                     <table className={styles.customers}>
                         <thead>
                             <tr>
+                            <th>Project Image</th>
                                 <th>Project Name</th>
                                 <th>Property Type</th>
                                 <th>Location</th>
                                 <th>Developer</th>
-                                <th>Project Image</th>
+                              
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {projects.map(project => (
                                 <tr key={project.project_id}>
-                                    <td>{project.project_name}</td>
-                                    <td>{project.property_type}</td>
-                                    <td>{project.location}</td>
-                                    <td>{project.developer_name}</td>
-                                    <td>
+                               
+                                <td>
+                                <Link href={`https://real-estate-gray-zeta.vercel.app/project-details?id=${project.project_id}`}>
                                         <Image
                                             width={100}
                                             height={100}
@@ -117,7 +117,15 @@ const ProjectList = () => {
                                             alt={project.project_name}
                                             className={styles.preview_img}
                                         />
+                                          </Link>
                                     </td>
+                                <td>{project.project_name}</td>
+                             
+                                 
+                                    <td>{project.property_type}</td>
+                                    <td>{project.location}</td>
+                                    <td>{project.developer_name}</td>
+
                                     <td>
                                         <div className={styles.action_box}>
                                             <i className="bx bx-edit" onClick={() => handleEditClick(project.project_id)}></i>
