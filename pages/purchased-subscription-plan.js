@@ -88,6 +88,11 @@ const Purchasesubscriptionplan = () => {
         setNewExpiryDate(subscription.expiry_date);
         setNewPlanId(subscription.subscription_id);
     };
+    const closePopup = () => {
+        setEditingSubscription(null);
+        setNewExpiryDate('');
+        setNewPlanId('');
+    };
 
     const handleUpdateSubscription = async () => {
         try {
@@ -158,32 +163,32 @@ const Purchasesubscriptionplan = () => {
                                         <td>{new Date(subscription.created_at).toLocaleDateString()}</td>
                                         <td>{new Date(subscription.expiry_date).toLocaleDateString()}</td>
                                         <td>
-                                            <button onClick={() => handleEditClick(subscription)}>Edit</button>
+                                            <button className={styles.edit_btn} onClick={() => handleEditClick(subscription)}><i class='bx bx-edit'></i> Edit</button>
                                             {editingSubscription?.subscription_id === subscription.subscription_id && (
-                                                <div>
-                                                    <label>
-                                                        Expiry Date:
-                                                        <input
-                                                            type="date"
-                                                            value={newExpiryDate}
-                                                            onChange={(e) => setNewExpiryDate(e.target.value)}
-                                                        />
-                                                    </label>
-                                                    <label>
-                                                        Plan:
-                                                        <select
-                                                            value={newPlanId}
-                                                            onChange={(e) => setNewPlanId(e.target.value)}
-                                                        >
-                                                            <option value="">Select Plan</option>
-                                                            {plans.map(plan => (
-                                                                <option key={plan.id} value={plan.id}>
-                                                                    {plan.plan_name}
-                                                                </option>
-                                                            ))}
-                                                        </select>
-                                                    </label>
-                                                    <button onClick={handleUpdateSubscription}>Update</button>
+                                                <div className={styles.main_popup_box}>
+                                                    <div className={styles.update_box}>
+                                                    <i className={`bx bxs-x-circle ${styles.cross_box}`} onClick={closePopup}></i>
+                                                        <label>
+                                                            Expiry Date: <input
+                                                                type="date"
+                                                                value={newExpiryDate}
+                                                                onChange={(e) => setNewExpiryDate(e.target.value)}
+                                                            />
+                                                        </label>
+                                                        <label>
+                                                            Plan: <select
+                                                                value={newPlanId}
+                                                                onChange={(e) => setNewPlanId(e.target.value)}>
+                                                                <option value="">Select Plan</option>
+                                                                {plans.map(plan => (
+                                                                    <option key={plan.id} value={plan.id}>
+                                                                        {plan.plan_name}
+                                                                    </option>
+                                                                ))}
+                                                            </select>
+                                                        </label>
+                                                        <button onClick={handleUpdateSubscription}>Update</button>
+                                                    </div>
                                                 </div>
                                             )}
                                         </td>

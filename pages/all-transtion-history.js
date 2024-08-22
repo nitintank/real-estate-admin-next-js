@@ -73,7 +73,6 @@ const TranstionHistory = () => {
                         <table className={styles.customers}>
                             <thead>
                                 <tr>
-                                    <th>User ID</th>
                                     <th>Username</th>
                                     <th>Total Subscription Coins</th>
                                     <th>Property Name</th>
@@ -91,7 +90,6 @@ const TranstionHistory = () => {
                                 {Array.isArray(transactionHistory) && transactionHistory.length > 0 ? (
                                     transactionHistory.map((transaction, index) => (
                                         <tr key={index}>
-                                            <td>{transaction.user_id}</td>
                                             <td>{transaction.user_name}</td>
                                             <td>{transaction.total_subscription_coins}</td>
                                             <td>{transaction.property_name}</td>

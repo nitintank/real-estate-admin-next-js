@@ -57,6 +57,11 @@
     margin-right: 5px;
 }
 
+.customers td a{
+  text-decoration: none;
+  color: black;
+}
+
 .agent_profile_img{
   width: auto;
   height: 50px;

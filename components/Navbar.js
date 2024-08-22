@@ -201,18 +201,18 @@ const Navbar = () => {
                         <li className={styles.item}>
                             <Link href="/purchased-subscription-plan" className={styles.nav_link}>
                                 <span className={styles.navlink_icon}>
-                                    <i className='bx bx-list-ol'></i>
+                                    <i class='bx bxs-leaf'></i>
                                 </span>
-                                <span className={styles.navlink}>Purchased Subscription Plan</span>
+                                <span className={styles.navlink}>Active Subscription</span>
                             </Link>
                         </li>
-                        
+
                         <li className={styles.item}>
                             <Link href="/all-transtion-history" className={styles.nav_link}>
                                 <span className={styles.navlink_icon}>
-                                    <i className='bx bx-list-ol'></i>
+                                    <i class='bx bx-list-check'></i>
                                 </span>
-                                <span className={styles.navlink}>All Transtion History</span>
+                                <span className={styles.navlink}>Transaction History</span>
                             </Link>
                         </li>
                     </ul>
