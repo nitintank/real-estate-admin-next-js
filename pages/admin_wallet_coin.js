@@ -71,7 +71,7 @@ const AddWalletCoin = () => {
 
         if (!selectedAgentObj || !selectedPropertyObj) {
             setLoading(false);
-            alert('Selected agent or property not found');
+            alert('Selected Agent or Property Not Found');
             return;
         }
 
@@ -183,8 +183,8 @@ const AddWalletCoin = () => {
                         <table className={styles.customers}>
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Agent ID</th>
+                                    {/* <th>ID</th>
+                                    <th>Agent ID</th> */}
                                     <th>Property Name</th>
                                     <th>Requested Coins</th>
                                     <th>Status</th>
@@ -194,14 +194,16 @@ const AddWalletCoin = () => {
                             <tbody>
                                 {requests.map(request => (
                                     <tr key={request.id}>
-                                        <td>{request.id}</td>
-                                        <td>{request.agent_id}</td>
+                                        {/* <td>{request.id}</td>
+                                        <td>{request.agent_id}</td> */}
                                         <td>{request.property_name}</td>
                                         <td>{request.requested_coins}</td>
                                         <td>{request.status}</td>
                                         <td>
-                                            <button onClick={() => handleRequest(request.id, 'approved')}>Approve</button>
-                                            <button onClick={() => handleRequest(request.id, 'rejected')}>Reject</button>
+                                            <div className={styles.action_box}>
+                                                <button onClick={() => handleRequest(request.id, 'approved')} className={styles.approve_btn}>Approve</button>
+                                                <button onClick={() => handleRequest(request.id, 'rejected')} className={styles.reject_btn}>Reject</button>
+                                            </div>
                                         </td>
                                     </tr>
                                 ))}
