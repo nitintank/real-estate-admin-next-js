@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styles from "@/styles/Login.module.css";
+import Image from 'next/image';
 
 const Login = () => {
     const [identifier, setIdentifier] = useState('')
@@ -34,36 +35,37 @@ const Login = () => {
             setInvalidLogin(true)
         }
         else if (response.role == "admin") {
-
-
             localStorage.setItem('email', response.email);
             localStorage.setItem('accessToken', response.access_token);
             localStorage.setItem('username', response.username);
             localStorage.setItem('role', response.role);
-            localStorage.setItem('userId', response.id); 
-            
+            localStorage.setItem('userId', response.id);
+
             location.href = "/"
         }
-        
+
     }
 
     return (
         <>
             <div className={styles.body}>
                 <div className={styles.wrapper}>
-                    <h2>Admin Login</h2>
                     <form method='POST' onSubmit={handleSubmit} className={styles.form}>
+                        <h2>Admin Login</h2>
                         <div className={styles.input_field}>
                             <input type="text" placeholder="Enter Email or Phone No." name='identifier' value={identifier} onChange={handleChange} required />
                             <label htmlFor="identifier">Enter Email or Phone No.</label>
                         </div>
                         <div className={styles.input_field}>
                             <input type="type" placeholder="Enter Password" name='password' value={password} onChange={handleChange} required />
-                            <label htmlFor="password">Enter your password</label>
+                            <label htmlFor="password">Enter Password</label>
                         </div>
-                        <button type="submit">Log In</button>
+                        <button type="submit">Login</button>
                         {invalidLogin && <p className={styles.redText}>Invalid Credentials, Try Again</p>}
                     </form>
+                </div>
+                <div className={styles.wrapper_2}>
+                    <Image src="/images/prop-agent-img.png" width={200} height={200} alt='' />
                 </div>
             </div>
         </>
