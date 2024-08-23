@@ -84,8 +84,6 @@ const TranstionHistory = () => {
                                     <th>Boost Coins</th>
                                     <th>Subscription Created At</th>
                                     <th>Subscription Expiry Date</th>
-                                    <th>Boost Expiry Date</th>
-                                    <th>Boost Created At</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -104,8 +102,6 @@ const TranstionHistory = () => {
                                             <td>{transaction.boost_coins}</td>
                                             <td>{new Date(transaction.subscription_created_at).toLocaleDateString()}</td>
                                             <td>{new Date(transaction.subscription_expiry_date).toLocaleDateString()}</td>
-                                            <td>{new Date(transaction.property_boost_expiry_date).toLocaleDateString()}</td>
-                                            <td>{new Date(transaction.property_boost_created_at).toLocaleDateString()}</td>
                                         </tr>
                                     ))
                                 ) : (
