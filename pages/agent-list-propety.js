@@ -69,7 +69,6 @@ const AgentList = () => {
             });
     };
 
-
     const updatePropertyStatus = (propertyId, newStatus) => {
         fetch(`https://a.khelogame.xyz/admin/agent-property/${propertyId}/status`, {
             method: 'PUT',
@@ -166,7 +165,9 @@ const AgentList = () => {
                                 <React.Fragment key={agentId}>
                                     <tr>
                                         <td>{index + 1}</td>
-                                        <td>{agent.agent_name}</td>
+                                        <td>
+                                            <Link href={`https://real-estate-gray-zeta.vercel.app/agent-detail?id=${agent.agent_id}`} target='_blank' className={styles.link_tag}>{agent.agent_name}</Link>
+                                        </td>
                                         <td>
                                             {agent.agent_profile && (
                                                 <Image
@@ -208,10 +209,11 @@ const AgentList = () => {
                                                         {agent.properties.map((property, propIndex) => (
                                                             <tr key={property.property_id}>
                                                                 <td>{propIndex + 1}</td>
-                                                                <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${property.property_id}`}>
-                                                                <td>{property.property_name}</td>
-                                            </Link>
-                                                               
+                                                                <td>
+                                                                    <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${property.property_id}`} target='_blank' className={styles.link_tag}>
+                                                                        {property.property_name}
+                                                                    </Link>
+                                                                </td>
                                                                 <td>{property.property_type}</td>
                                                                 <td>{property.property_subtype}</td>
                                                                 <td>{property.status}</td>

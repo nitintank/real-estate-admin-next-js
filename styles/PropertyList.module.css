@@ -108,6 +108,11 @@
   border-radius: 5px;
 }
 
+.link_tag{
+  text-decoration: none;
+  color: black;
+}
+
 /* Responsive Code */
 
 @media (max-width: 769px) {

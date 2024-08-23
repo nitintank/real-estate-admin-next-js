@@ -83,7 +83,6 @@ const NewProperty = () => {
     setFilteredProperties(tempProperties);
   };
 
-
   useEffect(() => {
     const fetchProperties = async () => {
       try {
@@ -224,10 +223,11 @@ const NewProperty = () => {
                     <td>{property.username}</td>
                     <td>{property.email}</td>
                     <td>{property.phone_number}</td>
-                    <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${property.property_id}`}>
-                                                                <td>{property.property_name}</td>
-                                            </Link>
-                    {/* <td>{property.property_name}</td> */}
+                    <td>
+                      <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${property.property_id}`} target='_blank' className={styles.link_tag}>
+                        {property.property_name}
+                      </Link>
+                    </td>
                     <td>{property.property_type}</td>
                     <td>{property.property_subtype}</td>
                     <td>{property.price}</td>

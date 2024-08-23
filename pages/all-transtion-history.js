@@ -92,10 +92,11 @@ const TranstionHistory = () => {
                                         <tr key={index}>
                                             <td>{transaction.user_name}</td>
                                             <td>{transaction.total_subscription_coins}</td>
-                                          
-                                            <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${transaction.property_id}`}>
-                                            <td>{transaction.property_name}</td>
-                                            </Link>
+                                            <td>
+                                                <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${transaction.property_id}`} target='_blank' className={styles.linkTag}>
+                                                    {transaction.property_name}
+                                                </Link>
+                                            </td>
                                             <td>{transaction.plan_name}</td>
                                             <td>{transaction.subscription_coins}</td>
                                             <td>{transaction.plan_price}</td>

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styles from "@/styles/UserList.module.css";
 import Navbar from "@/components/Navbar";
 import { useRouter } from 'next/router';
-import ChangePasswordModal from '@/components/ChangePasswordModal'; // Import the new modal component
+import ChangePasswordModal from '@/components/ChangePasswordModal';
+import Link from 'next/link';
 
 const UserList = () => {
     const [users, setUsers] = useState([]);
@@ -200,7 +201,10 @@ const UserList = () => {
                                                         <tbody>
                                                             {user.properties.map(property => (
                                                                 <tr key={property.property_id}>
-                                                                    <td>{property.property_name}</td>
+                                                                    <td>
+                                                                        <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${property.property_id}`} target='_blank' className={styles.link_tag}>
+                                                                            {property.property_name}
+                                                                        </Link></td>
                                                                     <td>{property.property_type}</td>
                                                                     <td>{property.status}</td>
                                                                     <td className={styles.button_mega_box}>

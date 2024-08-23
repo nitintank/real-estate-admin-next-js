@@ -156,7 +156,7 @@ const AllReviews = () => {
                                     </td>
                                     <td>
                                         <div className={styles.property_name_box}>
-                                            <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${review.property_id}`}>
+                                            <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${review.property_id}`} target='_blank'>
                                                 <h4>{review.property_name}</h4>
                                             </Link>
                                             <p>AED {review.price}</p>

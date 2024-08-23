@@ -156,9 +156,10 @@ const Purchasesubscriptionplan = () => {
                                 {subscriptions.map((subscription) => (
                                     <tr key={subscription.subscription_id}>
                                         <td>{subscription.user_name}</td>
-                                        <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${subscription.property_id}`}>   
-                                        <td>{subscription.property_name || 'N/A'}</td>
-                                        </Link>
+                                        <td>
+                                            <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${subscription.property_id}`} className={styles.linkTag} target='_blank'>{subscription.property_name || 'N/A'}
+                                            </Link>
+                                        </td>
                                         <td>{subscription.plan_name}</td>
                                         <td>{subscription.plan_price}</td>
                                         <td>{subscription.subscription_coins}</td>
@@ -170,7 +171,7 @@ const Purchasesubscriptionplan = () => {
                                             {editingSubscription?.subscription_id === subscription.subscription_id && (
                                                 <div className={styles.main_popup_box}>
                                                     <div className={styles.update_box}>
-                                                    <i className={`bx bxs-x-circle ${styles.cross_box}`} onClick={closePopup}></i>
+                                                        <i className={`bx bxs-x-circle ${styles.cross_box}`} onClick={closePopup}></i>
                                                         <label>
                                                             Expiry Date: <input
                                                                 type="date"

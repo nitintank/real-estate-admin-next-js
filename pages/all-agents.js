@@ -144,7 +144,11 @@ const AllAgents = () => {
                                 {filteredAgent.map((agent) => (
                                     <tr key={agent.id}>
                                         <td>{agent.id}</td>
-                                        <td>{agent.name}</td>
+                                        <td>
+                                            <Link href={`https://real-estate-gray-zeta.vercel.app/agent-detail?id=${agent.id}`} target='_blank' className={styles.link_tag}>
+                                                {agent.name}
+                                            </Link>
+                                        </td>
                                         <td>
                                             {agent.image_path && (
                                                 <Image

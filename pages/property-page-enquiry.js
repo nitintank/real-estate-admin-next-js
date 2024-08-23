@@ -80,7 +80,7 @@ const PropertyPageEnquiry = () => {
                                 <tr key={inquiry.id}>
                                     <td>{index + 1}</td>
                                     <td>{inquiry.user_name}</td>
-                                    <td><Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${inquiry.property_id}`}>{inquiry.property_name}</Link></td>
+                                    <td><Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${inquiry.property_id}`} className={styles.link_tag} target='_blank'>{inquiry.property_name}</Link></td>
                                     <td>{inquiry.name}</td>
                                     <td>{inquiry.email}</td>
                                     <td>{inquiry.phone_number}</td>

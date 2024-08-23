@@ -95,21 +95,18 @@ const ProjectList = () => {
                     <table className={styles.customers}>
                         <thead>
                             <tr>
-                            <th>Project Image</th>
+                                <th>Project Image</th>
                                 <th>Project Name</th>
                                 <th>Property Type</th>
                                 <th>Location</th>
                                 <th>Developer</th>
-                              
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {projects.map(project => (
                                 <tr key={project.project_id}>
-                               
-                                <td>
-                                <Link href={`https://real-estate-gray-zeta.vercel.app/project-details?id=${project.project_id}`}>
+                                    <td>
                                         <Image
                                             width={100}
                                             height={100}
@@ -117,11 +114,11 @@ const ProjectList = () => {
                                             alt={project.project_name}
                                             className={styles.preview_img}
                                         />
-                                          </Link>
                                     </td>
-                                <td>{project.project_name}</td>
-                             
-                                 
+                                    <td>
+                                        <Link href={`https://real-estate-gray-zeta.vercel.app/project-details?id=${project.project_id}`} target='_blank' className={styles.link_tag}>{project.project_name}
+                                        </Link>
+                                    </td>
                                     <td>{project.property_type}</td>
                                     <td>{project.location}</td>
                                     <td>{project.developer_name}</td>

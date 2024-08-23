@@ -131,7 +131,9 @@ const Agenttransactions = () => {
                                 {filteredTransactions.map((transaction, index) => (
                                     <tr key={transaction.id}>
                                         <td>{index + 1}</td>
-                                        <td>{transaction.name}</td>
+                                        <td>
+                                        <Link href={`https://real-estate-gray-zeta.vercel.app/agent-detail?id=${transaction.agent_id}`} target='_blank' className={styles.linkTag}>{transaction.name}</Link>
+                                        </td>
                                         <td>
                                             <Image
                                                 width={100}
@@ -141,10 +143,10 @@ const Agenttransactions = () => {
                                                 className={styles.agent_profile_img}
                                             />
                                         </td>
-                                        <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${transaction.property_id}`}>
-                                        <td>{transaction.property_detail}</td>
+                                        <td>
+                                            <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${transaction.property_id}`} className={styles.linkTag} target='_blank'>{transaction.property_detail}
                                             </Link>
-                                      
+                                        </td>
                                         <td>
                                             <Link className={styles.docunment_box} href={`https://a.khelogame.xyz/${transaction.tnc_document_contract}`} target="_blank" rel="noopener noreferrer">
                                                 View Document

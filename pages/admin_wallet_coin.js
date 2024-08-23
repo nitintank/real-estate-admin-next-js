@@ -190,7 +190,7 @@ const AddWalletCoin = () => {
                         <table className={styles.customers}>
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    {/* <th>ID</th> */}
                                     <th>Agent Name</th>
                                     <th>Property Name</th>
                                     <th>Requested Coins</th>
@@ -201,10 +201,10 @@ const AddWalletCoin = () => {
                             <tbody>
                                 {requests.map(request => (
                                     <tr key={request.id}>
-                                        <td>{request.id}</td>
-                                        <td>{agentLookup[request.agent_id]}</td>
+                                        {/* <td>{request.id}</td> */}
+                                        <td><Link href={`https://real-estate-gray-zeta.vercel.app/agent-detail?id=${request.agent_id}`} target='_blank' className={styles.linkTag}>{agentLookup[request.agent_id]}</Link></td>
                                         <td>
-                                            <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${request.property_id}`}>
+                                            <Link href={`https://real-estate-gray-zeta.vercel.app/property?id=${request.property_id}`} target='_blank' className={styles.linkTag}>
                                                 {request.property_name}
                                             </Link>
                                         </td>

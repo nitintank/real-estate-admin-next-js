@@ -142,6 +142,11 @@
     border-radius: 5px;
 }
 
+.linkTag{
+    text-decoration: none;
+    color: black;
+}
+
 /* Responsive Code */
 
 @media (max-width: 769px) {

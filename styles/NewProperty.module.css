@@ -118,6 +118,11 @@
     gap: 10px;
 }
 
+.link_tag{
+  text-decoration: none;
+  color: black;
+}
+
 /* Property Filter Big Box */
 
 .property_filter_big_box {
