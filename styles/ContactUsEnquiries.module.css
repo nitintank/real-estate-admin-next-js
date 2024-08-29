@@ -50,11 +50,11 @@
   color: white;
 }
 
-.customers td i{
-    font-size: 22px;
-    color: black;
-    cursor: pointer;
-    margin-right: 5px;
+.customers td i {
+  font-size: 22px;
+  color: black;
+  cursor: pointer;
+  margin-right: 5px;
 }
 
 /* Radio Button */
@@ -130,16 +130,23 @@
   }
 
   .dashboard_main_box h2 {
-    font-size: 25px;
+    font-size: 18px;
+    margin-top: 10px;
     text-align: center;
   }
 
+  .radioInput label {
+    padding: 7px;
+  }
+
   /* Table CSS Code */
-  .customers th{
+  .customers th {
     white-space: nowrap;
     font-size: 14px;
   }
-  .customers td, .customers th{
+
+  .customers td,
+  .customers th {
     padding: 5px;
     font-size: 14px;
   }

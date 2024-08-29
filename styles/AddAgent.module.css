@@ -16,26 +16,18 @@
 
 /* Form Box Css */
 
-.agent_form_big_box{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin: 10px auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
+.agent_form_big_box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
 }
 
-.agent_form_big_box input{
-    border: 1px solid #ebebeb;
-    padding: 5px 10px;
-    color: black;
-    font-size: 14px;
-    border-radius: 10px;
-}
-
-.agent_form_big_box select{
+.agent_form_big_box input {
   border: 1px solid #ebebeb;
   padding: 5px 10px;
   color: black;
@@ -43,26 +35,34 @@
   border-radius: 10px;
 }
 
-.agent_form_big_box textarea{
-    border: 1px solid #ebebeb;
-    padding: 10px;
-    color: black;
-    font-size: 14px;
-    border-radius: 10px;
+.agent_form_big_box select {
+  border: 1px solid #ebebeb;
+  padding: 5px 10px;
+  color: black;
+  font-size: 14px;
+  border-radius: 10px;
 }
 
-.agent_form_big_box input[type=file]{
-    cursor: pointer;
+.agent_form_big_box textarea {
+  border: 1px solid #ebebeb;
+  padding: 10px;
+  color: black;
+  font-size: 14px;
+  border-radius: 10px;
 }
 
-.agent_form_big_box input[type=submit]{
-    width: 100%;
-    background-color: #4070f4;
-    color: white;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    margin: 10px auto;
+.agent_form_big_box input[type=file] {
+  cursor: pointer;
+}
+
+.agent_form_big_box input[type=submit] {
+  width: 100%;
+  background-color: #4070f4;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 10px auto;
 }
 
 .errorText {
@@ -83,14 +83,27 @@
   }
 
   .dashboard_main_box h2 {
-    font-size: 25px;
+    font-size: 21px;
     text-align: center;
   }
+
   /* Form CSS */
-  .agent_form_big_box{
+  .agent_form_big_box {
     padding: 10px;
   }
-  .agent_form_big_box input{
-    padding: 7px;
+
+  .agent_form_big_box input {
+    padding: 5px 7px;
+    border-radius: 5px;
+  }
+
+  .agent_form_big_box textarea {
+    padding: 5px 7px;
+    border-radius: 5px;
+  }
+
+  .agent_form_big_box input[type=submit] {
+    font-size: 16px;
+    margin: 5px auto;
   }
 }

@@ -115,6 +115,12 @@
   color: black;
 }
 
+.action_box{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 /* Responsive Code */
 
 @media (max-width: 769px) {
@@ -127,7 +133,7 @@
   }
 
   .dashboard_main_box h2 {
-    font-size: 25px;
+    font-size: 21px;
     text-align: center;
   }
 

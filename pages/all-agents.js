@@ -167,9 +167,11 @@ const AllAgents = () => {
                                         <td>{new Date(agent.created_at).toLocaleDateString()}</td>
                                         <td>{agent.is_suspended ? 'Suspended' : 'Active'}</td>
                                         <td>
-                                            <i className='bx bx-edit' onClick={() => handleEditClick(agent.id)}></i>
-                                            <i className='bx bx-trash' onClick={() => handleDeleteClick(agent.id)}></i>
-                                            <i className='bx bx-key' onClick={() => handlePasswordChangeClick(agent)}></i> {/* New icon for changing password */}
+                                            <div className={styles.action_box}>
+                                                <i className='bx bx-edit' onClick={() => handleEditClick(agent.id)}></i>
+                                                <i className='bx bx-trash' onClick={() => handleDeleteClick(agent.id)}></i>
+                                                <i className='bx bx-key' onClick={() => handlePasswordChangeClick(agent)}></i>
+                                            </div>
                                         </td>
                                     </tr>
                                 ))}

@@ -159,7 +159,7 @@
     }
 
     .dashboard_main_box h2 {
-        font-size: 25px;
+        font-size: 21px;
         text-align: center;
     }
 
@@ -169,9 +169,24 @@
     }
 
     .agent_form_big_box input {
-        padding: 7px;
+        padding: 5px 7px;
+        border-radius: 5px;
     }
-
+    .agent_form_big_box select {
+        padding: 5px 7px;
+        border-radius: 5px;
+    }
+    .agent_form_big_box input[type=submit] {
+        font-size: 14px;
+        margin: 2px auto;
+    }
+    .approve_btn {
+        font-size: 12px;
+    }
+    
+    .reject_btn {
+        font-size: 12px;
+    }
     /* Table CSS Code */
     .customers th {
         white-space: nowrap;

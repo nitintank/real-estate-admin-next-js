@@ -157,16 +157,18 @@
     }
   
     .dashboard_main_box h2 {
-      font-size: 25px;
+      font-size: 21px;
       text-align: center;
     }
 
     .switch_toggle{
         width: 100%;
         justify-content: space-between;
+        overflow-x: scroll;
     }
     .switch_toggle input+label{
         font-size: 14px;
+        white-space: nowrap;
     }
   
     /* Table CSS Code */

@@ -217,6 +217,7 @@ const EditAgent = () => {
                             alt="Profile Image"
                             width={200}
                             height={200}
+                            className={styles.img_box_css}
                         />
                     )}
 

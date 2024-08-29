@@ -180,8 +180,10 @@ const ManageWebsiteNumber = () => {
                                         <td>{support.support_contact_number}</td>
                                         <td>{support.emergency_contact_number}</td>
                                         <td>
-                                            <i className='bx bxs-edit' onClick={() => handleEditClick(support.id)}></i>
-                                            <i className='bx bx-trash' onClick={() => handleDeleteClick(support.id)}></i>
+                                            <div className={styles.action_box}>
+                                                <i className='bx bxs-edit' onClick={() => handleEditClick(support.id)}></i>
+                                                <i className='bx bx-trash' onClick={() => handleDeleteClick(support.id)}></i>
+                                            </div>
                                         </td>
                                     </tr>
                                 ))}

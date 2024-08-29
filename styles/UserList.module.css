@@ -234,16 +234,17 @@
     margin-left: 0px;
     height: calc(100vh - 65px);
     margin-top: 65px;
-    padding: 10px;
+    padding: 2px 10px 10px 10px;
   }
 
   .dashboard_main_box h2 {
-    font-size: 25px;
+    font-size: 21px;
     text-align: center;
   }
   .customer_filter_big_box{
     flex-direction: column;
     gap: 5px;
+    margin: 5px auto 10px auto;
   }
 
   .customer_filter_big_box button {
@@ -256,6 +257,7 @@
 
   .search_customer_box input {
     width: 100%;
+    padding: 5px 7px;
   }
 
   /* Table CSS Code */

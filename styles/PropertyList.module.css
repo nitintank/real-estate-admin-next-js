@@ -125,7 +125,7 @@
   }
 
   .dashboard_main_box h2 {
-    font-size: 25px;
+    font-size: 21px;
     text-align: center;
   }
 
@@ -133,6 +133,7 @@
 
   .property_filter_big_box{
     flex-wrap: wrap;
+    gap: 5px;
   }
   .search_property_box{
     width: 100%;
@@ -142,6 +143,7 @@
   }
   .search_property_box select{
     width: 100%;
+    padding: 5px 7px;
   }
   .search_filter_btn{
     width: 100%;

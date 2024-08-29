@@ -70,6 +70,14 @@
   color: black;
 }
 
+.preview_img {
+  width: auto;
+  height: 70px;
+  border-radius: 10px;
+  margin: auto;
+  display: block;
+}
+
 /* Responsive Code */
 
 @media (max-width: 769px) {
@@ -82,7 +90,7 @@
   }
 
   .dashboard_main_box h2 {
-    font-size: 25px;
+    font-size: 21px;
     text-align: center;
   }
 
@@ -97,12 +105,9 @@
     padding: 5px;
     font-size: 14px;
   }
-}
 
-.preview_img {
-  width: auto;
-  height: 70px;
-  border-radius: 10px;
-  margin: auto;
-  display: block;
+  .preview_img {
+    height: 50px;
+    border-radius: 5px;
+  }
 }
